@@ -1,408 +1,494 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { 
-  ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
-  RadarChart, PolarGrid, PolarAngleAxis, Radar
+  ResponsiveContainer, XAxis, YAxis, RadarChart, PolarGrid, PolarAngleAxis, Radar, 
+  BarChart, Bar, Tooltip, Cell, AreaChart, Area, CartesianGrid
 } from 'recharts';
 import { 
-  MapPin, Mail, Linkedin, Database, Layout, ShieldCheck, 
-  TrendingUp, GraduationCap, Award, BarChart3, Globe, 
-  Briefcase, Microscope, Search, X, ChevronRight, CheckCircle2,
-  Cpu
+  Database, Briefcase, X, ChevronRight, CheckCircle2,
+  Cpu, Mail, Linkedin, FileText, ExternalLink, Terminal, Layers, Activity,
+  ShieldCheck, GraduationCap, Globe, Network, 
+  PieChart, MapPin, Phone, Code2, ShieldAlert, Award, LineChart as LineChartIcon, Command
 } from "lucide-react";
 
-// --- APPLE HEALTH STYLE DATA ---
-const performanceData = [
-  { phase: 'Discovery', efficiency: 40, accuracy: 75 },
-  { phase: 'Modelling', efficiency: 65, accuracy: 88 },
-  { phase: 'Testing', efficiency: 85, accuracy: 95 },
-  { phase: 'Deployment', efficiency: 100, accuracy: 100 },
-];
+// --- 1. AI TERMINAL BOOT SEQUENCE ---
+const AIBootSequence = ({ onComplete }: { onComplete: () => void }) => {
+  const [progress, setProgress] = useState(0);
+  const [log, setLog] = useState("INITIALISING NEURAL NETWORK...");
 
-const skillsData = [
-  { subject: 'SQL', A: 95, fullMark: 100 },
-  { subject: 'Data Modelling', A: 100, fullMark: 100 },
-  { subject: 'Risk Analysis', A: 85, fullMark: 100 },
-  { subject: 'Agile/Jira', A: 80, fullMark: 100 },
-  { subject: 'Architecture', A: 90, fullMark: 100 },
-  { subject: 'Power BI', A: 75, fullMark: 100 },
-];
+  useEffect(() => {
+    const logs = [
+      "ESTABLISHING SECURE CONNECTION...",
+      "LOADING MDM PROTOCOLS...",
+      "PARSING RESUME DATA [ANIKET_BANSAL]...",
+      "RENDERING VISUALISATIONS...",
+      "SYSTEM ONLINE."
+    ];
+    let currentProgress = 0;
+    let logIndex = 0;
 
-// --- APPLE SCROLL ANIMATIONS ---
-const scrollReveal = {
-  hidden: { opacity: 0, y: 60, scale: 0.98 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } 
-  }
+    const interval = setInterval(() => {
+      currentProgress += Math.floor(Math.random() * 15) + 5;
+      if (currentProgress >= 100) {
+        currentProgress = 100;
+        clearInterval(interval);
+        setTimeout(onComplete, 800);
+      }
+      setProgress(currentProgress);
+      
+      if (currentProgress > (logIndex + 1) * 20 && logIndex < logs.length) {
+        setLog(logs[logIndex]);
+        logIndex++;
+      }
+    }, 150);
+
+    return () => clearInterval(interval);
+  }, [onComplete]);
+
+  return (
+    <motion.div exit={{ opacity: 0, scale: 1.1 }} transition={{ duration: 0.8 }} className="fixed inset-0 z-[9999] bg-[#020617] flex flex-col items-center justify-center p-8 font-mono text-cyan-500">
+      <Network size={64} className="animate-spin-slow mb-8 opacity-80" />
+      <div className="w-full max-w-md">
+        <div className="flex justify-between text-xs mb-2 tracking-widest">
+          <span>{log}</span>
+          <span>{progress}%</span>
+        </div>
+        <div className="h-1 w-full bg-cyan-950 rounded-full overflow-hidden">
+          <motion.div className="h-full bg-cyan-400 shadow-[0_0_15px_#22d3ee]" style={{ width: `${progress}%` }} />
+        </div>
+      </div>
+    </motion.div>
+  );
 };
 
-// --- TAILWIND CONSTANTS (LIGHT MODE) ---
-// Note: Changed from dark glass to light glass
-const appleGlass = "bg-white/80 backdrop-blur-[50px] border border-black/[0.04] rounded-[32px] shadow-lg shadow-black/[0.03]";
-const appleLink = "text-[#0071e3] cursor-pointer inline-flex items-center gap-1 font-normal text-lg hover:underline";
+// --- 2. INTERACTIVE NEURAL BACKGROUND ---
+const NeuralBackground = () => {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 2000], [0, -200]);
+  const y2 = useTransform(scrollY, [0, 2000], [0, -400]);
 
-export default function AppleLightPortfolio() {
-  const [loading, setLoading] = useState(true);
-  const [bootProgress, setBootProgress] = useState(0);
-  const [activeModal, setActiveModal] = useState<string | null>(null);
+  return (
+    <div className="fixed inset-0 z-0 bg-[#020617] overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#22d3ee 1px, transparent 1px), linear-gradient(90deg, #22d3ee 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      <motion.div style={{ y: y1 }} className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[150px]" />
+      <motion.div style={{ y: y2 }} className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] bg-blue-700/10 rounded-full blur-[150px]" />
+    </div>
+  );
+};
 
-  // --- BULLETPROOF MAC BOOT SEQUENCE (LIGHT MODE) ---
-  useEffect(() => {
-    let currentProgress = 0;
-    const interval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 5) + 2; 
-      if (currentProgress > 100) currentProgress = 100;
-      
-      setBootProgress(currentProgress);
-      
-      if (currentProgress === 100) {
-        clearInterval(interval);
-        setTimeout(() => setLoading(false), 700);
-      }
-    }, 30);
-    
-    return () => clearInterval(interval);
-  }, []);
+// --- 3. ANIMATED DATA CARD ---
+const InteractiveCard = ({ children, className = "", delay = 0, onClick, onHover }: any) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay }}
+      onClick={onClick}
+      onMouseEnter={onHover}
+      className={`relative bg-[#0f172a]/60 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-8 hover:border-cyan-400/50 hover:bg-[#0f172a]/80 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] transition-all cursor-pointer group ${className}`}
+    >
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500/0 to-transparent group-hover:via-cyan-500/50 transition-all duration-700" />
+      {children}
+    </motion.div>
+  );
+};
 
-  // --- PROJECTS WITH VERIFIED IMAGES ---
+// --- MAIN PORTFOLIO COMPONENT ---
+export default function AniketAIAnalyticsPortfolio() {
+  const [booting, setBooting] = useState(true);
+  const [activeModal, setActiveModal] = useState<any>(null);
+  const [filter, setFilter] = useState("ALL");
+  const [terminalLogs, setTerminalLogs] = useState<string[]>(["SYSTEM READY. WAITING FOR USER INPUT..."]);
+
+  const addLog = (msg: string) => {
+    setTerminalLogs(prev => {
+      const newLogs = [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`];
+      return newLogs.slice(-4); // Keep only last 4 logs
+    });
+  };
+
+  // Resume Data
   const projects = [
     {
       id: "experian",
-      title: "Experian.",
-      subtitle: "Financial Modelling Redefined.",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1600",
-      tag: "Data Architecture",
-      // Accents stay blue/indigo, but standard text flips
-      textGradient: "from-blue-600 to-indigo-600",
-      icon: <TrendingUp size={24} className="text-white" />,
+      category: "FINANCE",
+      title: "Financial Modelling & Income Verification Algorithm",
+      subtitle: "Experian Project",
+      image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2000",
       details: [
-        "Acted in a Data Modeller capacity to support the design, implementation, and maintenance of conceptual, Logical and Physical data models.",
-        "Translated business requirements into logical data models to reverse-engineer financial metrics.",
-        "Utilised SQL to work with database tables and supported database changes.",
-        "Developed data dictionaries and glossaries to define data elements and their usage."
-      ]
+        "Demonstrated deep technical proficiency by developing a Python-based logic engine to process massive datasets and maintain master data integrity.",
+        "Built automated workflows to reverse-engineer financial metrics, overseeing the resolution of data anomalies and ensuring strict compliance with operational standards.",
+        "This project highlights the advanced data analysis skills required to manage customer master data business processes securely."
+      ],
+      stack: ["Python", "Master Data Management", "Financial Modelling"]
     },
     {
       id: "nhs",
-      title: "NHS.",
-      subtitle: "Strategic Healthcare Investment.",
-      image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1600",
-      tag: "Infrastructure",
-      textGradient: "from-cyan-600 to-blue-700",
-      icon: <Microscope size={24} className="text-white" />,
+      category: "HEALTHCARE",
+      title: "Strategic Recommendations for Healthcare Sector",
+      subtitle: "NHS",
+      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2000",
       details: [
-        "Partnered with other functions and business areas to implement architectures and identify, own, and resolve design-related issues.",
-        "Displayed a willingness to support different activities, contribute where needed, and work effectively as part of a team to propose a £3.2m strategic investment.",
-        "Used clear communication skills to drive continuous improvement using agile tracking concepts similar to Jira and Confluence."
-      ]
-    },
-    {
-      id: "emerge",
-      title: "Emerge Lab.",
-      subtitle: "Workforce Analytics.",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600",
-      tag: "Compliance & Risk",
-      textGradient: "from-emerald-600 to-teal-700",
-      icon: <Search size={24} className="text-white" />,
-      details: [
-        "Led a 6-month customer-facing evaluation of the business case for Diversity & Inclusion.",
-        "Mapped recruitment processes against the Equality Act 2010 to identify compliance risks and update internal best practices.",
-        "Recommended shifting from tick-box compliance to culture-based strategies."
-      ]
+        "Conducted robust statistical analysis on 10 years of massive, complex healthcare datasets to investigate operational bottlenecks and supply chain inefficiencies.",
+        "Acted as a central data lead to translate raw data into actionable business insights, identifying that 72 percent of delays were driven by external logistics and social care bottlenecks.",
+        "Proposed a 3.2m strategic investment to modernise infrastructure and optimise the delivery of healthcare services."
+      ],
+      stack: ["Statistical Analysis", "Healthcare Logistics", "Business Insights"]
     },
     {
       id: "ey",
-      title: "EY Crypto.",
-      subtitle: "Predictive Forecasting.",
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1600",
-      tag: "Market Volatility",
-      textGradient: "from-amber-600 to-orange-700",
-      icon: <BarChart3 size={24} className="text-white" />,
+      category: "FINANCE",
+      title: "Market Volatility & Predictive Forecasting",
+      subtitle: "Crypto-Economics – EY",
+      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2000",
       details: [
-        "Analysed and monitored data usage patterns to identify opportunities for data optimisation and improvement.",
-        "Produced logical designs in relevant subject areas, showing data flows, inputs, stored data, and outputs to predict market trends.",
-        "Identified common components to support strategic decision making."
-      ]
+        "Applied advanced statistical analysis and prediction modelling to forecast future events and trends in highly dynamic markets.",
+        "Utilised data visualisation tools to translate complex statistical findings into clear supply controls and high-level strategies.",
+        "Demonstrated exceptional logical reasoning by showing that external indicators strongly impacted market stability."
+      ],
+      stack: ["Predictive Modelling", "Data Visualisation", "Statistics"]
+    },
+    {
+      id: "emerge",
+      category: "COMPLIANCE",
+      title: "Strategic Workforce Analysis: Inclusivity in the Workplace",
+      subtitle: "Emerge Lab",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000",
+      details: [
+        "Supported delivery teams by preparing datasets and consultancy outputs for a 6-month research project evaluating the commercial impact of workplace diversity.",
+        "Produced data extracts and initial outputs for senior review, working to agreed timelines to deliver actionable insights that influence strategic business decisions."
+      ],
+      stack: ["Data Extraction", "Consultancy", "Actionable Insights"]
     }
   ];
 
+  const filteredProjects = filter === "ALL" ? projects : projects.filter(p => p.category === filter);
+
+  const academics = [
+    {
+      id: "msc",
+      title: "MSc Data Analytics",
+      subtitle: "University of Strathclyde, Glasgow, UK | 2023 – 2024",
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000",
+      details: [
+        "Key Modules: Big Data Fundamentals, Machine Learning, Business Analysis, Data Analytics in Practice.",
+        "Dissertation: Conducted a 6-month research project on Inclusivity in the Workplace, analysing the commercial impact of diverse teams."
+      ],
+      stack: ["Big Data", "Machine Learning", "Business Analysis"]
+    },
+    {
+      id: "btech",
+      title: "B.Tech Computer Engineering",
+      subtitle: "MVN University, India | 2019 – 2022",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000",
+      details: [
+        "Core Focus: Data Structures, Algorithms, Database Management Systems (DBMS), Software Engineering.",
+        "Dissertation: Designed a prototype for an Automatic Object Detection Vehicle, engineering real-time collision-avoidance algorithms using sensor fusion logic."
+      ],
+      stack: ["DBMS", "Data Structures", "Algorithms"]
+    }
+  ];
+
+  const radarData = [
+    { subject: 'MDM & SQL', A: 95 },
+    { subject: 'Python', A: 85 },
+    { subject: 'Power BI', A: 90 },
+    { subject: 'Statistics', A: 95 },
+    { subject: 'Compliance', A: 100 },
+    { subject: 'Logistics', A: 88 },
+  ];
+
   return (
-    // Note: Changed from bg-black to Apple's Light Off-White
-    <div className="bg-[#f5f5f7] min-h-screen text-[#1d1d1f] antialiased selection:bg-[#0071e3]/20">
-      {/* Global styling injected safely */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        ::-webkit-scrollbar { display: none; }
-        body { 
-          background-color: #f5f5f7; 
-          overflow-x: hidden; 
-          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          letter-spacing: -0.015em;
-        }
-      `}} />
+    <div className="bg-[#020617] min-h-screen text-slate-300 font-sans selection:bg-cyan-500/30">
+      <AnimatePresence>{booting && <AIBootSequence onComplete={() => setBooting(false)} />}</AnimatePresence>
+      {!booting && <NeuralBackground />}
 
-      {/* --- MAC BOOT LOADER (LIGHT MODE) --- */}
-      <AnimatePresence>
-        {loading && (
-          <motion.div 
-            exit={{ opacity: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }} 
-            // Changed from bg-black to bg-white
-            className="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center"
-          >
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.1 }}
-              className="mb-10"
-            >
-              {/* Icon is now dark */}
-              <Database size={60} className="text-black" />
-            </motion.div>
-            <div className="w-56 h-1 bg-[#e8e8ed] rounded-full overflow-hidden">
-              {/* Bar progress is now dark/black */}
-              <motion.div 
-                className="h-full bg-black rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: `${bootProgress}%` }}
-                transition={{ ease: "linear", duration: 0.1 }}
-              />
+      <main className={`relative z-10 max-w-[1400px] mx-auto px-6 py-12 space-y-16 transition-opacity duration-1000 ${booting ? 'opacity-0' : 'opacity-100'}`}>
+        
+        {/* --- HEADER: RESUME SYNCED --- */}
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-12">
+          <InteractiveCard className="col-span-1 lg:col-span-2 flex flex-col justify-center" delay={0.1} onHover={() => addLog("USER INSPECTING CORE PROFILE")}>
+            <div className="flex items-center gap-6 mb-6">
+              <div className="relative w-20 h-20 bg-[#0f172a] rounded-2xl border border-cyan-500/50 flex items-center justify-center overflow-hidden">
+                <Database className="text-cyan-400 z-10" size={36}/>
+                <motion.div animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="absolute inset-[-50%] bg-[conic-gradient(from_90deg_at_50%_50%,#00000000_50%,#06b6d4_100%)] opacity-20" />
+              </div>
+              <div>
+                <motion.h1 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="text-4xl md:text-6xl font-black text-white tracking-tight mb-2">Aniket Bansal</motion.h1>
+                <motion.h2 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }} className="text-xl md:text-2xl text-cyan-400 font-medium font-mono tracking-wide">Data Analyst</motion.h2>
+              </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            
+            <p className="text-lg text-slate-300 leading-relaxed mb-8 border-l-2 border-cyan-500/50 pl-4">
+              Data Analyst with an <span className="text-cyan-400 font-semibold">MSc in Data Analytics</span> and a <span className="text-cyan-400 font-semibold">B.Tech in Computer Engineering</span>, experienced in highly regulated sectors including healthcare and financial services. Proficient in advanced statistical analysis, data visualisation, and <span className="text-white font-semibold">Master Data Management</span> principles to optimise complex supply chain logistics. Adept at ensuring strict regulatory compliance, managing massive datasets, and translating raw data into actionable business insights to drive operational excellence.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 text-sm font-mono">
+              <span className="flex items-center gap-2 bg-slate-800/80 border border-slate-700 px-4 py-2 rounded-lg text-cyan-100"><MapPin size={16} className="text-cyan-500"/> Glasgow, G75 0LJ</span>
+              <span className="flex items-center gap-2 bg-slate-800/80 border border-slate-700 px-4 py-2 rounded-lg text-cyan-100"><Mail size={16} className="text-cyan-500"/> ianiketbansalx@gmail.com</span>
+              <a href="http://www.linkedin.com/in/ianiketx" target="_blank" onClick={() => addLog("EXTERNAL LINK: LINKEDIN OPENED")} className="flex items-center gap-2 bg-cyan-950 border border-cyan-500/50 text-cyan-400 px-4 py-2 rounded-lg hover:bg-cyan-900 transition-colors cursor-pointer"><Linkedin size={16}/> LinkedIn Profile</a>
+            </div>
+          </InteractiveCard>
 
-      {!loading && (
-        <div className="relative min-h-screen pb-40">
+          <InteractiveCard className="col-span-1 flex flex-col justify-between" delay={0.2} onHover={() => addLog("USER VIEWING SKILL MATRIX")}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-bold text-slate-400 font-mono tracking-widest"><Activity size={16} className="inline mr-2 text-cyan-500"/>AI SKILL MATRIX</h3>
+              <span className="flex h-3 w-3"><span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-cyan-400 opacity-75"></span><span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span></span>
+            </div>
+            <div className="w-full h-[250px] -ml-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
+                  <PolarGrid stroke="#1e293b" />
+                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#cbd5e1', fontSize: 10, fontFamily: 'monospace' }} />
+                  <Radar name="Proficiency" dataKey="A" stroke="#22d3ee" strokeWidth={2} fill="#22d3ee" fillOpacity={0.2} />
+                  <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', borderRadius: '8px' }} itemStyle={{ color: '#22d3ee' }}/>
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+          </InteractiveCard>
+        </section>
+
+        {/* --- PROFESSIONAL EXPERIENCE: DIRECT LINE GROUP --- */}
+        <section>
+          <div className="flex items-center gap-4 mb-6">
+            <Briefcase className="text-cyan-500" size={28}/>
+            <h2 className="text-3xl font-bold text-white tracking-tight">Professional Experience</h2>
+          </div>
           
-          {/* SOFTER LIGHT AURA BACKGROUND */}
-          <div className="fixed inset-0 z-0 pointer-events-none">
-            <div className="absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] rounded-full bg-indigo-100/50 blur-[150px]" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[80vw] h-[80vw] rounded-full bg-blue-100/50 blur-[150px]" />
+          <InteractiveCard delay={0.3} onClick={() => addLog("EXPANDED PROFESSIONAL EXPERIENCE")}>
+            <div className="flex flex-col md:flex-row justify-between md:items-end mb-6 pb-6 border-b border-slate-800/80">
+              <div>
+                <h3 className="text-3xl font-bold text-white mb-2">Direct Line Group</h3>
+                <div className="flex items-center gap-3 text-cyan-400 font-mono text-sm bg-cyan-950/30 w-fit px-3 py-1 rounded border border-cyan-500/20">
+                  <ShieldAlert size={14}/> Damage Fixer Handler – MCR
+                </div>
+              </div>
+              <div className="mt-4 md:mt-0 text-left md:text-right font-mono text-sm text-slate-400">
+                <p className="text-white">Glasgow, UK</p>
+                <p className="text-cyan-500 mt-1">Nov 2025 – Present</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed">Act as a functional SME within a highly regulated FCA environment, managing the damage fulfilment supply chain and interacting directly with external Logistics Service Providers.</p>
+              </div>
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed">Manage, validate, and maintain customer accounts and master data within enterprise systems, ensuring 100 percent compliance with strict industry regulations.</p>
+              </div>
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed">Deliver second-line resolution for escalated customer queries within tight KPIs, addressing complex system failures and logistical bottlenecks.</p>
+              </div>
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed">Collaborate with cross-functional teams to ensure high-speed delivery of services, applying logical reasoning to make high-stakes decisions that improve overall supply chain effectiveness.</p>
+              </div>
+            </div>
+          </InteractiveCard>
+        </section>
+
+        {/* --- DYNAMIC PROJECT FILTERING SYSTEM --- */}
+        <section>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div className="flex items-center gap-4">
+              <Layers className="text-cyan-500" size={28}/>
+              <h2 className="text-3xl font-bold text-white tracking-tight">Data Intelligence Theses</h2>
+            </div>
+            
+            {/* Interactive AI Filter */}
+            <div className="flex flex-wrap gap-2 p-1 bg-slate-900/80 rounded-lg border border-slate-800">
+              {["ALL", "HEALTHCARE", "FINANCE", "COMPLIANCE"].map((cat) => (
+                <button 
+                  key={cat}
+                  onClick={() => { setFilter(cat); addLog(`EXECUTED QUERY: FILTER_PROJECTS WHERE CATEGORY = '${cat}'`); }}
+                  className={`px-4 py-2 rounded-md text-xs font-mono font-bold transition-all ${filter === cat ? 'bg-cyan-500 text-slate-900 shadow-[0_0_10px_#22d3ee]' : 'text-slate-400 hover:text-cyan-300 hover:bg-slate-800'}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <main className="relative z-10 w-full max-w-[1200px] mx-auto px-6 pt-32 space-y-48">
-            
-            {/* 1. APPLE LIGHT HERO */}
-            <motion.section 
-              initial="hidden" animate="visible" variants={scrollReveal}
-              className="flex flex-col items-center text-center space-y-6 pt-20"
-            >
-              <h2 className="text-xl md:text-3xl font-semibold text-[#6e6e73] tracking-tight">Aniket Bansal</h2>
-              <h1 className="text-6xl md:text-[8rem] font-bold tracking-tighter leading-[1.05] text-[#1d1d1f]">
-                Data.<br />Modelled to<br />perfection.
-              </h1>
-              <p className="text-2xl text-[#6e6e73] max-w-2xl font-medium tracking-tight mt-6 leading-relaxed">
-                Translating complex business requirements into Conceptual, Logical and Physical data architectures.
-              </p>
-              <div className="flex gap-8 pt-10 items-center">
-                {/* Contact button is dark on light */}
-                <a href="mailto:ianiketbansalx@gmail.com" className="bg-[#1d1d1f] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-black transition-colors shadow-lg shadow-black/10">
-                  Connect
-                </a>
-                <a href="http://www.linkedin.com/in/ianiketx" target="_blank" className={appleLink}>
-                  LinkedIn Profile <ChevronRight size={18} className="mt-0.5"/>
-                </a>
-              </div>
-            </motion.section>
-
-            {/* 2. THE CHIP: SKILLS RADAR (flipped colors) */}
-            <motion.section 
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={scrollReveal}
-              className={`${appleGlass} p-12 md:p-20 flex flex-col items-center text-center`}
-            >
-              {/* Cpu is dark */}
-              <Cpu size={56} className="text-[#1d1d1f] mb-10" />
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#1d1d1f] mb-5 leading-tight">Mind-blowing capabilities.</h2>
-              <p className="text-xl text-[#6e6e73] max-w-2xl mb-20 leading-relaxed">
-                Adept at using SQL to work with database tables, developing data dictionaries, and mapping data flows.
-              </p>
-              
-              <div className="w-full max-w-2xl h-[450px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="75%" data={skillsData}>
-                    {/* Darker grid on light background */}
-                    <PolarGrid stroke="rgba(0,0,0,0.06)" />
-                    {/* Ticks are dark */}
-                    <PolarAngleAxis dataKey="subject" tick={{ fill: '#1d1d1f', fontSize: 14, fontWeight: 500 }} />
-                    <Radar name="Skills" dataKey="A" stroke="#0071e3" strokeWidth={3} fill="#0071e3" fillOpacity={0.15} />
-                  </RadarChart>
-                </ResponsiveContainer>
-              </div>
-            </motion.section>
-
-            {/* 3. EDGE-TO-EDGE PROJECT CARDS (flipped card text) */}
-            <section className="space-y-32">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollReveal} className="text-center">
-                <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-[#1d1d1f]">Strategic Impact.</h2>
-                <p className="text-2xl text-[#6e6e73] mt-5">High-stakes architecture for high-stakes environments.</p>
-              </motion.div>
-
-              <div className="space-y-12">
-                {projects.map((project) => (
-                  <motion.div
-                    initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={scrollReveal}
-                    key={project.id}
-                    // border style update for light mode
-                    className={`${appleGlass} overflow-hidden relative group cursor-pointer border-0 ring-1 ring-black/[0.04] shadow-xl`}
-                    onClick={() => setActiveModal(project.id)}
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <AnimatePresence>
+              {filteredProjects.map((p, index) => (
+                <motion.div 
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  key={p.id}
+                >
+                  <InteractiveCard 
+                    className="h-full flex flex-col group overflow-hidden p-0" 
+                    onClick={() => { setActiveModal(p); addLog(`OPENED DATASHEET: ${p.title}`); }}
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-2">
-                      {/* Text content background adjusted for light mode glass */}
-                      <div className="p-12 md:p-20 flex flex-col justify-center order-2 md:order-1 relative z-10 bg-white/70">
-                        <p className="text-[#6e6e73] font-semibold tracking-widest uppercase text-sm mb-4">{project.tag}</p>
-                        <h3 className="text-5xl md:text-6xl font-bold tracking-tighter text-[#1d1d1f] mb-5 leading-tight">{project.title}</h3>
-                        <p className={`text-2xl text-transparent bg-clip-text bg-gradient-to-r ${project.textGradient} font-semibold mb-10`}>{project.subtitle}</p>
-                        <span className={appleLink}>Learn more <ChevronRight size={20} className="mt-0.5"/></span>
-                      </div>
-                      
-                      <div className="h-[400px] md:h-auto overflow-hidden relative order-1 md:order-2 bg-[#fafafa]">
-                        <div 
-                          // Mix blend changed from screen (dark) to standard/multiply for light
-                          className="absolute inset-0 bg-cover bg-center transition-transform duration-[1.5s] ease-out group-hover:scale-105 opacity-80"
-                          style={{ backgroundImage: `url('${project.image}')` }}
-                        />
-                        {/* Gradient overlays adjusted for light content */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/90 to-transparent md:block hidden" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-white/90 to-transparent block md:hidden" />
+                    <div className="h-48 overflow-hidden relative">
+                      <div className="absolute inset-0 bg-cyan-900/40 mix-blend-multiply z-10 group-hover:bg-transparent transition-all duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent z-20" />
+                      <motion.img whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} src={p.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt={p.title} />
+                      <div className="absolute top-4 right-4 z-30 bg-[#0f172a]/80 backdrop-blur border border-cyan-500/50 px-3 py-1 rounded text-[10px] font-mono text-cyan-400 font-bold">
+                        {p.category}
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            </section>
+                    
+                    <div className="p-8 flex-grow flex flex-col">
+                      <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-cyan-400 transition-colors">{p.title}</h3>
+                      <p className="text-sm font-mono text-slate-400 mb-6">{p.subtitle}</p>
+                      
+                      <div className="mt-auto flex flex-wrap gap-2 pt-6 border-t border-slate-800">
+                        {p.stack.map(s => <span key={s} className="px-2 py-1 bg-slate-800 rounded text-[10px] font-mono text-slate-300">{s}</span>)}
+                      </div>
+                    </div>
+                  </InteractiveCard>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </section>
 
-            {/* 4. PERFORMANCE & EXPERIENCE (flipped chart/text colors) */}
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollReveal} className={`${appleGlass} p-10 md:p-14 flex flex-col`}>
-                <h3 className="text-3xl font-bold text-[#1d1d1f] tracking-tight mb-2">System Performance.</h3>
-                <p className="text-[#6e6e73] text-lg mb-12 leading-relaxed">Evaluative judgements based on factual information.</p>
+        {/* --- EDUCATION WITH AI LANDING PROTOCOL --- */}
+        <section>
+          <div className="flex items-center gap-4 mb-6">
+            <GraduationCap className="text-cyan-500" size={28}/>
+            <h2 className="text-3xl font-bold text-white tracking-tight">Academic Credentials</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {academics.map((edu, idx) => (
+              <InteractiveCard key={edu.id} delay={0.1 * idx} className="flex flex-col">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{edu.title}</h3>
+                    <p className="text-cyan-500 text-sm font-mono mt-1">{edu.subtitle}</p>
+                  </div>
+                  {idx === 0 ? <Globe className="text-slate-600" size={32}/> : <Cpu className="text-slate-600" size={32}/>}
+                </div>
                 
-                <div className="flex-1 w-full min-h-[300px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={performanceData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
-                      <defs>
-                        <linearGradient id="colorAcc" x1="0" y1="0" x2="0" y2="1">
-                          {/* Changed blue for light mode clarity */}
-                          <stop offset="5%" stopColor="#0071e3" stopOpacity={0.3}/>
-                          <stop offset="95%" stopColor="#0071e3" stopOpacity={0}/>
-                        </linearGradient>
-                      </defs>
-                      {/* Grid is dark */}
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
-                      {/* Ticks are dark */}
-                      <XAxis dataKey="phase" stroke="#6e6e73" tick={{fill: '#6e6e73', fontSize: 14}} axisLine={false} tickLine={false} />
-                      <YAxis stroke="#6e6e73" tick={{fill: '#6e6e73', fontSize: 14}} axisLine={false} tickLine={false} />
-                      {/* Tooltip bg is now light/white */}
-                      <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '16px', backdropFilter: 'blur(10px)' }} itemStyle={{ color: '#1d1d1f' }} labelStyle={{color: '#6e6e73'}} />
-                      <Area type="monotone" dataKey="efficiency" stroke="#6e6e73" strokeWidth={2} fill="transparent" />
-                      <Area type="monotone" dataKey="accuracy" stroke="#0071e3" strokeWidth={4} fill="url(#colorAcc)" />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </motion.div>
-
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollReveal} className={`${appleGlass} p-10 md:p-14`}>
-                <Briefcase size={32} className="text-[#1d1d1f] mb-6" />
-                <h3 className="text-3xl font-bold text-[#1d1d1f] tracking-tight mb-2 leading-tight">Direct Line Group.</h3>
-                <p className="text-[#0071e3] text-lg mb-10 font-medium">Glasgow, UK | Nov 2025 – Present</p>
-                <ul className="space-y-6 text-[#6e6e73] text-lg leading-relaxed">
-                  {/* Icons now use dark contrasting color */}
-                  <li className="flex gap-4"><CheckCircle2 size={24} className="text-[#1d1d1f] shrink-0 mt-0.5"/> Take ownership for managing risk and strengthening controls.</li>
-                  <li className="flex gap-4"><CheckCircle2 size={24} className="text-[#1d1d1f] shrink-0 mt-0.5"/> Resolve problems by identifying and selecting solutions.</li>
-                  <li className="flex gap-4"><CheckCircle2 size={24} className="text-[#1d1d1f] shrink-0 mt-0.5"/> Escalate breaches of policies while maintaining clear communication.</li>
-                </ul>
-              </motion.div>
-            </section>
-
-            {/* 5. ACADEMICS (flipped text/link/border colors) */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scrollReveal} className="text-center space-y-16">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tighter text-[#1d1d1f]">Academic Pedigree.</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left max-w-4xl mx-auto">
-                <div className="space-y-4">
-                  <GraduationCap size={40} className="text-[#1d1d1f] mb-6" />
-                  <h3 className="text-3xl font-bold text-[#1d1d1f]">MSc Data Analytics.</h3>
-                  <p className="text-[#6e6e73] text-xl">University of Strathclyde | 2023 – 2024</p>
-                  <p className="text-[#6e6e73] text-lg pt-4 leading-relaxed">Dissertation: Conducted a 6-month research project on Inclusivity in the Workplace, analysing the commercial impact of diverse teams.</p>
-                  <a href="/my-msc-degree.pdf" target="_blank" className={`${appleLink} pt-5`}>View Degree <ChevronRight size={18} className="mt-0.5"/></a>
+                <div className="space-y-4 text-sm text-slate-300 mb-8 border-l-2 border-slate-700 pl-4 mt-4 flex-grow">
+                  <p><span className="text-cyan-400 font-bold">Focus:</span> {edu.details[0].split(': ')[1] || edu.details[0]}</p>
+                  <p><span className="text-cyan-400 font-bold">Dissertation:</span> {edu.details[1].split(': ')[1] || edu.details[1]}</p>
                 </div>
 
-                <div className="space-y-4">
-                  <Layout size={40} className="text-[#1d1d1f] mb-6" />
-                  <h3 className="text-3xl font-bold text-[#1d1d1f]">B.Tech Mechanical.</h3>
-                  <p className="text-[#6e6e73] text-xl">MVN University | 2019 – 2022</p>
-                  <p className="text-[#6e6e73] text-lg pt-4 leading-relaxed">Dissertation: Designed a prototype for an Automatic Object Detection Vehicle utilizing sensor fusion logic.</p>
-                  <a href="/my-btech-degree.pdf" target="_blank" className={`${appleLink} pt-5`}>View Degree <ChevronRight size={18} className="mt-0.5"/></a>
+                <button 
+                  onClick={() => { setActiveModal(edu); addLog(`FETCHING CREDENTIALS: ${edu.title}`); }}
+                  className="w-full py-4 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 hover:from-cyan-600/20 hover:to-blue-600/20 border border-cyan-500/30 text-cyan-400 rounded-xl text-xs font-mono font-bold tracking-widest uppercase transition-all flex justify-center items-center gap-3 group"
+                >
+                  <FileText size={16} className="group-hover:scale-110 transition-transform"/> Access Degree Protocol
+                </button>
+              </InteractiveCard>
+            ))}
+          </div>
+        </section>
+
+        {/* --- SKILLS & MISC (EXACT MATCH TO RESUME) --- */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+           <InteractiveCard delay={0.3}>
+             <h3 className="text-xl font-bold text-white flex items-center gap-3 mb-6"><Award className="text-cyan-500"/> Certifications & Virtual Experience</h3>
+             <ul className="space-y-4 text-sm text-slate-300 font-mono">
+               <li className="flex flex-col border-b border-slate-800 pb-3 group hover:pl-2 transition-all">
+                 <span className="text-cyan-400 font-bold text-xs mb-1">JPMorgan Chase & Co</span>
+                 <span>Quantitative Research Virtual Experience Program on Forage</span>
+               </li>
+               <li className="flex flex-col border-b border-slate-800 pb-3 group hover:pl-2 transition-all">
+                 <span className="text-cyan-400 font-bold text-xs mb-1">British Airways</span>
+                 <span>Data Science Job Simulation</span>
+               </li>
+               <li className="flex flex-col border-b border-slate-800 pb-3 group hover:pl-2 transition-all">
+                 <span className="text-cyan-400 font-bold text-xs mb-1">Fujitsu</span>
+                 <span>Cyber Security</span>
+               </li>
+               <li className="flex flex-col group hover:pl-2 transition-all">
+                 <span className="text-cyan-400 font-bold text-xs mb-1 flex items-center gap-2">Microsoft <span className="bg-yellow-500/20 text-yellow-500 px-2 py-0.5 rounded text-[10px]">In Progress</span></span>
+                 <span>PL300: Power BI Data Analyst</span>
+               </li>
+             </ul>
+           </InteractiveCard>
+
+           <InteractiveCard delay={0.4}>
+             <h3 className="text-xl font-bold text-white flex items-center gap-3 mb-6"><Terminal className="text-cyan-500"/> Core Data Proficiencies</h3>
+             <div className="space-y-6 text-sm text-slate-300">
+                <div>
+                  <span className="text-cyan-400 font-bold block mb-2 font-mono border-b border-slate-800 pb-1">Data Analysis and Systems</span> 
+                  <p className="leading-relaxed">Master Data Management (MDM), Enterprise Database Systems, SQL, Python, Advanced Excel, Data Validation.</p>
                 </div>
-              </div>
+                <div>
+                  <span className="text-cyan-400 font-bold block mb-2 font-mono border-b border-slate-800 pb-1">Visualisation and Statistics</span> 
+                  <p className="leading-relaxed">Power BI, Tableau, Advanced Statistical Analysis, Predictive Modelling, Massive Datasets.</p>
+                </div>
+                <div>
+                  <span className="text-cyan-400 font-bold block mb-2 font-mono border-b border-slate-800 pb-1">Supply Chain and Compliance</span> 
+                  <p className="leading-relaxed">Logistics Optimisation, Fulfilment Processes, Strict Regulatory Compliance (FCA/Healthcare), Interface Failure Resolution, Logical Reasoning.</p>
+                </div>
+             </div>
+           </InteractiveCard>
+        </section>
 
-              {/* Certs section updated for light mode */}
-              <div className="pt-12 border-t border-black/10 flex flex-wrap justify-center gap-x-12 gap-y-6 text-[#6e6e73] text-lg font-medium">
-                <span className="flex items-center gap-2"><Award size={20}/> JP Morgan Chase</span>
-                <span className="flex items-center gap-2"><Award size={20}/> British Airways</span>
-                <span className="flex items-center gap-2"><ShieldCheck size={20}/> Fujitsu Cyber Security</span>
-                <span className="flex items-center gap-2 text-[#1d1d1f] font-semibold"><Database size={20} className="text-[#0071e3]"/> PL300: Power BI</span>
-              </div>
-            </motion.section>
+      </main>
 
-          </main>
+      {/* --- LIVE AI TERMINAL LOGGER --- */}
+      <div className="fixed bottom-0 left-0 w-full bg-[#020617]/90 backdrop-blur-xl border-t border-cyan-900/50 p-2 z-[100] hidden md:block font-mono text-[10px] text-cyan-500 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div className="max-w-[1400px] mx-auto flex items-start gap-4 px-6 h-12 overflow-hidden relative">
+          <Command size={14} className="mt-0.5 shrink-0 opacity-50"/>
+          <div className="flex flex-col w-full justify-end h-full">
+            <AnimatePresence>
+              {terminalLogs.map((log, i) => (
+                <motion.div key={log + i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: Math.max(0.2, 1 - (terminalLogs.length - 1 - i) * 0.3), y: 0 }} className="truncate">
+                  {log}
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>
-      )}
+      </div>
 
-      {/* --- APPLE LIGHT FULL SCREEN MODAL --- */}
+      {/* --- DEEP DIVE MODAL (ANIMATED & DETAILED) --- */}
       <AnimatePresence>
         {activeModal && (
-          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8">
+          <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 md:p-8">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActiveModal(null)} className="absolute inset-0 bg-[#020617]/90 backdrop-blur-sm" />
             <motion.div 
-              initial={{ opacity: 0, filter: "blur(10px)" }} 
-              animate={{ opacity: 1, filter: "blur(0px)" }} 
-              exit={{ opacity: 0, filter: "blur(10px)" }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              // Changed from bg-black/90 to bg-white/90
-              className="absolute inset-0 bg-[#f5f5f7]/90 backdrop-blur-3xl"
-              onClick={() => setActiveModal(null)}
-            />
-            <motion.div 
-              layoutId={`card-${activeModal}`}
-              // Changed from bg-[#1c1c1e] to bg-white
-              className="relative w-full max-w-4xl bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-2xl max-h-[90vh] border border-black/[0.04]"
+              layoutId={`card-${activeModal.id}`} 
+              className="relative w-full max-w-5xl bg-[#0f172a] border border-cyan-500/30 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(34,211,238,0.1)] flex flex-col md:flex-row max-h-[85vh]"
             >
-              <div className="relative w-full h-[300px] shrink-0 bg-[#fafafa]">
-                <div 
-                  // Blend logic removed for light mode modal
-                  className="absolute inset-0 bg-cover bg-center opacity-80"
-                  style={{ backgroundImage: `url('${projects.find(p => p.id === activeModal)?.image}')` }}
-                />
-                {/* Gradient modified for dark text readability on light image */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent" />
-                
-                {/* Close button flipped to dark on light */}
-                <button onClick={() => setActiveModal(null)} className="absolute top-6 right-6 p-2 bg-white/50 rounded-full hover:bg-white/80 transition-colors text-black z-20 backdrop-blur-sm"><X size={20}/></button>
-                
-                <div className="absolute bottom-0 left-0 p-10 md:p-14 w-full z-10">
-                  <p className="text-lg font-semibold text-[#6e6e73] mb-2">{projects.find(p => p.id === activeModal)?.tag}</p>
-                  <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-[#1d1d1f]">{projects.find(p => p.id === activeModal)?.title}</h2>
+                <div className="w-full md:w-2/5 bg-slate-950 relative min-h-[250px] md:min-h-full">
+                   <div className="absolute inset-0 opacity-40 mix-blend-luminosity" style={{ backgroundImage: `url('${activeModal.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/50 to-transparent" />
+                   <div className="absolute bottom-8 left-8 right-8 text-white z-10">
+                      <p className="text-[10px] font-mono text-cyan-400 mb-3 flex items-center gap-2"><Activity size={12}/> DATA_EXTRACT_COMPLETE</p>
+                      <h3 className="text-3xl font-bold leading-tight">{activeModal.title}</h3>
+                   </div>
                 </div>
-              </div>
-              
-              <div className="p-10 md:p-14 overflow-y-auto">
-                <div className="space-y-6">
-                  <h4 className="text-2xl font-bold text-[#1d1d1f] mb-10 border-b border-black/10 pb-5">Architecture & Outcomes.</h4>
-                  <ul className="space-y-8 text-[#6e6e73] text-xl leading-relaxed">
-                    {projects.find(p => p.id === activeModal)?.details.map((detail, idx) => (
-                      <li key={idx} className="flex gap-6 items-start">
-                        {/* Checkmark uses accent blue for contrast */}
-                        <CheckCircle2 size={28} className="shrink-0 text-[#0071e3] mt-0.5" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
+
+                <div className="w-full md:w-3/5 p-8 md:p-12 relative text-left overflow-y-auto">
+                   <button onClick={() => setActiveModal(null)} className="absolute top-6 right-6 p-2 bg-slate-800/50 rounded-lg hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-400 transition-all border border-transparent hover:border-cyan-500/50"><X size={20}/></button>
+                   
+                   <p className="text-sm font-mono text-cyan-400 mb-6 pb-4 border-b border-slate-800">{activeModal.subtitle}</p>
+                   
+                   <div className="space-y-6 text-slate-300 mb-10">
+                      {activeModal.details.map((d: string, i: number) => (
+                        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + (i * 0.1) }} key={i} className="flex gap-4 items-start bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                           <CheckCircle2 className="text-cyan-500 shrink-0 mt-0.5" size={18}/>
+                           <span className="leading-relaxed text-sm">{d}</span>
+                        </motion.div>
+                      ))}
+                   </div>
+
+                   <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
+                      <span className="text-[10px] font-mono text-slate-500 w-full mb-2">APPLIED TECHNOLOGIES:</span>
+                      {activeModal.stack.map((s: string, i: number) => (
+                        <motion.span initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5 + (i * 0.1) }} key={s} className="px-3 py-1.5 rounded-lg bg-cyan-950/30 border border-cyan-500/20 text-xs font-mono text-cyan-300">
+                          {s}
+                        </motion.span>
+                      ))}
+                   </div>
                 </div>
-              </div>
             </motion.div>
           </div>
         )}
