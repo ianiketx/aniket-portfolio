@@ -223,7 +223,7 @@ export default function AniketAIAnalyticsPortfolio() {
             </div>
             
             <p className="text-lg text-slate-300 leading-relaxed mb-8 border-l-2 border-cyan-500/50 pl-4">
-              Data Analyst with an <span className="text-cyan-400 font-semibold">MSc in Data Analytics</span> and a <span className="text-cyan-400 font-semibold">B.Tech in Computer Engineering</span>, experienced in highly regulated sectors including healthcare and financial services. Proficient in advanced statistical analysis, data visualisation, and <span className="text-white font-semibold">Master Data Management</span> principles to optimise complex supply chain logistics. Adept at ensuring strict regulatory compliance, managing massive datasets, and translating raw data into actionable business insights to drive operational excellence.
+             Data Analyst with an <span className="text-cyan-400 font-semibold">MSc in Data Analytics</span> and hands-on operational experience within the <span className="text-white font-semibold">UK insurance sector</span>. Proficient in extracting, manipulating, and reconciling complex structured and unstructured datasets to drive actionable commercial insights. Adept at utilising <span className="text-cyan-400 font-semibold">Python, PySpark, and Power BI</span> to build robust data pipelines, dynamic reports, and maintain data dictionaries. Combines strong technical capabilities with a deep understanding of insurance workflows and information security principles to empower pricing teams and support strategic, data-driven decision-making.
             </p>
             
             <div className="flex flex-wrap gap-4 text-sm font-mono">
