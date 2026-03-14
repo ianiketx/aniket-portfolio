@@ -251,14 +251,15 @@ export default function AniketAIAnalyticsPortfolio() {
           </InteractiveCard>
         </section>
 
-        {/* --- PROFESSIONAL EXPERIENCE: DIRECT LINE GROUP --- */}
+        {/* --- PROFESSIONAL EXPERIENCE --- */}
         <section>
           <div className="flex items-center gap-4 mb-6">
             <Briefcase className="text-cyan-500" size={28}/>
             <h2 className="text-3xl font-bold text-white tracking-tight">Professional Experience</h2>
           </div>
           
-          <InteractiveCard delay={0.3} onClick={() => addLog("EXPANDED PROFESSIONAL EXPERIENCE")}>
+          {/* DIRECT LINE GROUP */}
+          <InteractiveCard delay={0.3} onClick={() => addLog("EXPANDED DLG EXPERIENCE")}>
             <div className="flex flex-col md:flex-row justify-between md:items-end mb-6 pb-6 border-b border-slate-800/80">
               <div>
                 <h3 className="text-3xl font-bold text-white mb-2">Direct Line Group</h3>
@@ -288,6 +289,44 @@ export default function AniketAIAnalyticsPortfolio() {
               <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
                 <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
                 <p className="text-slate-300 leading-relaxed">Collaborate with cross-functional teams to ensure high-speed delivery of services, applying logical reasoning to make high-stakes decisions that improve overall supply chain effectiveness.</p>
+              </div>
+            </div>
+          </InteractiveCard>
+
+          <div className="h-8"></div> {/* Spacer between cards */}
+
+          {/* TWILEARN INTERNSHIP */}
+          <InteractiveCard delay={0.4} onClick={() => addLog("EXPANDED TWILEARN EXPERIENCE")}>
+            <div className="flex flex-col md:flex-row justify-between md:items-end mb-6 pb-6 border-b border-slate-800/80">
+              <div>
+                <h3 className="text-3xl font-bold text-white mb-2">TwiLearn</h3>
+                <div className="flex items-center gap-3 text-cyan-400 font-mono text-sm bg-cyan-950/30 w-fit px-3 py-1 rounded border border-cyan-500/20">
+                  {/* Note: Ensure 'Database' or 'Code' icon is imported from lucide-react at the top of your file */}
+                  <Briefcase size={14}/> Data Scientist (Intern)
+                </div>
+              </div>
+              <div className="mt-4 md:mt-0 text-left md:text-right font-mono text-sm text-slate-400">
+                <p className="text-white">Remote</p>
+                <p className="text-cyan-500 mt-1">Jan 2025 – Jul 2025</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed"><strong className="text-white">Data Solutions & DevOps:</strong> Developed and deployed Python and PySpark-based data solutions to predict outcomes, utilising DevOps practices to manage and update workflows efficiently.</p>
+              </div>
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed"><strong className="text-white">Data Cleansing & Structuring:</strong> Engineered robust data pipelines using SQL and Databricks to cleanse raw data, converting semi-structured and unstructured data into structured formats.</p>
+              </div>
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed"><strong className="text-white">Self-Service & Manipulation:</strong> Utilised Python to extract, manipulate, and reconcile data from the data lake, building capacity for self-service access to data.</p>
+              </div>
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800">
+                <CheckCircle2 className="text-cyan-500 shrink-0 mt-1" size={20}/>
+                <p className="text-slate-300 leading-relaxed"><strong className="text-white">Dynamic Reporting:</strong> Prototyped NLP solutions to analyse unstructured customer feedback, creating dynamic reports within Power BI and Unity Catalog environments.</p>
               </div>
             </div>
           </InteractiveCard>
