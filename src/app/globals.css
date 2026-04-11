@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
   scroll-behavior: smooth;
 }
@@ -5,6 +6,8 @@ body {
   background: #000;
   cursor: default;
 }
+=======
+>>>>>>> 7a81371d29ec12c18580b97a91884f81a549f163
 @import "tailwindcss";
 
 :root {
