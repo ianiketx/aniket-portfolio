@@ -211,8 +211,8 @@ const GlobalStyles = () => (
 
 // ─── CUSTOM CURSOR ────────────────────────────────────────────────────────────
 const Cursor = () => {
-  const cursorRef = useRef(null);
-  const trailRef = useRef(null);
+  const cursorRef = useRef<any>(null);
+  const trailRef = useRef<any>(null);
   useEffect(() => {
     const move = (e: any) => {
       if (cursorRef.current) { cursorRef.current.style.left = e.clientX + "px"; cursorRef.current.style.top = e.clientY + "px"; }
@@ -255,7 +255,7 @@ const DataTicker = () => {
 // ─── ANIMATED NUMBER ─────────────────────────────────────────────────────────
 const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }) => {
   const [display, setDisplay] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   useEffect(() => {
     if (!inView) return;
@@ -280,7 +280,7 @@ const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }) => {
 // ─── SKILL BAR ───────────────────────────────────────────────────────────────
 const SkillBar = ({ name, value, delay = 0 }) => {
   const [filled, setFilled] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   useEffect(() => {
     if (inView) setTimeout(() => setFilled(value), delay);
@@ -300,7 +300,7 @@ const SkillBar = ({ name, value, delay = 0 }) => {
 
 // ─── SECTION WRAPPER ─────────────────────────────────────────────────────────
 const FadeSection = ({ children, delay = 0, style = {} }) => {
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
     <motion.div ref={ref} initial={{ opacity: 0, y: 32 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -318,7 +318,7 @@ const AIAnalyst = () => {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const bottomRef = useRef(null);
+  const bottomRef = useRef<any>(null);
 
   useEffect(() => {
     if (bottomRef.current) bottomRef.current.scrollIntoView({ behavior: "smooth" });
