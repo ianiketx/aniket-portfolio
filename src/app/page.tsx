@@ -299,7 +299,7 @@ const SkillBar = ({ name, value, delay = 0 }: any) => {
 };
 
 // ─── SECTION WRAPPER ─────────────────────────────────────────────────────────
-const FadeSection = ({ children, delay = 0, style = {} }) => {
+const FadeSection = ({ children, delay = 0, style = {} }: any) => {
   const ref = useRef<any>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
@@ -434,7 +434,7 @@ Available for: Data Analyst, Junior Data Analyst, Analytics roles across the UK`
 };
 
 // ─── PROJECT MODAL ────────────────────────────────────────────────────────────
-const ProjectModal = ({ project, onClose }) => (
+const ProjectModal = ({ project, onClose }: any) => (
   <AnimatePresence>
     {project && (
       <div style={{ position: "fixed", inset: 0, zIndex: 9990, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
