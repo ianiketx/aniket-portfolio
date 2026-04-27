@@ -675,7 +675,7 @@ export default function AniketPortfolio() {
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
               <a href="mailto:ianiketbansalx@gmail.com" className="btn-outline">Get in Touch</a>
               <a href="http://www.linkedin.com/in/ianiketx" target="_blank" className="btn-outline">LinkedIn</a>
-              <a href="https://github.com/ianiketbansalx" target="_blank" className="btn-outline">GitHub</a>
+              <a href="https://github.com/ianiketx" target="_blank" className="btn-outline">GitHub</a>
             </div>
           </motion.div>
         </section>
@@ -899,8 +899,8 @@ export default function AniketPortfolio() {
               <div style={{ display: "flex", flexDirection: "column", gap: 16, minWidth: 200 }}>
                 {[
                   ["LinkedIn", "http://www.linkedin.com/in/ianiketx"],
-                  ["GitHub", "https://github.com/ianiketbansalx"],
-                  ["Portfolio", "https://aniket-portfolio-9hfs.vercel.app/"],
+                  ["GitHub", "https://github.com/ianiketx"],
+                  ["Portfolio", "https://aniket-portfolio-three.vercel.app"],
                 ].map(([l, h]) => (
                   <a key={l} href={h} target="_blank" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "var(--mono)", fontSize: 12, color: "var(--slate2)", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.04)", paddingBottom: 12, transition: "color 0.2s" }}
                     onMouseEnter={e => e.currentTarget.style.color = "var(--amber)"}
