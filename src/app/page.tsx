@@ -253,7 +253,7 @@ const DataTicker = () => {
 };
 
 // ─── ANIMATED NUMBER ─────────────────────────────────────────────────────────
-const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }) => {
+const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }: any) => {
   const [display, setDisplay] = useState(0);
   const ref = useRef<any>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -278,7 +278,7 @@ const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }) => {
 };
 
 // ─── SKILL BAR ───────────────────────────────────────────────────────────────
-const SkillBar = ({ name, value, delay = 0 }) => {
+const SkillBar = ({ name, value, delay = 0 }: any) => {
   const [filled, setFilled] = useState(0);
   const ref = useRef<any>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
