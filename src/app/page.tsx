@@ -900,7 +900,6 @@ export default function AniketPortfolio() {
                 {[
                   ["LinkedIn", "http://www.linkedin.com/in/ianiketx"],
                   ["GitHub", "https://github.com/ianiketx"],
-                  ["Portfolio", "https://aniket-portfolio-three.vercel.app"],
                 ].map(([l, h]) => (
                   <a key={l} href={h} target="_blank" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "var(--mono)", fontSize: 12, color: "var(--slate2)", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.04)", paddingBottom: 12, transition: "color 0.2s" }}
                     onMouseEnter={e => e.currentTarget.style.color = "var(--amber)"}
