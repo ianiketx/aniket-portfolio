@@ -482,7 +482,7 @@ const ProjectModal = ({ project, onClose }: any) => (
 // ─── MAIN PORTFOLIO ───────────────────────────────────────────────────────────
 export default function AniketPortfolio() {
   const [activeTab, setActiveTab] = useState("projects");
-  const [activeProject, setActiveProject] = useState(null);
+  const [activeProject, setActiveProject] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
