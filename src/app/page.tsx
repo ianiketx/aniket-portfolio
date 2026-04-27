@@ -784,10 +784,10 @@ export default function AniketPortfolio() {
                       ["Analysis", ["SQL", "Python", "Excel (Advanced)", "Google Sheets"]],
                       ["Engineering", ["Databricks", "PySpark", "MLflow", "Git / GitHub"]],
                       ["Methods", ["ETL Design", "Feature Engineering", "NLP", "Statistical Modelling"]],
-                    ].map(([group, items]) => (
+                    ].map(([group, items]: any) => (
                       <div key={group} style={{ padding: "24px 28px", background: "rgba(8,8,15,0.6)", border: "1px solid var(--line2)" }}>
                         <div style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--amber)", opacity: 0.6, letterSpacing: "0.14em", marginBottom: 14 }}>{group.toUpperCase()}</div>
-                        {items.map(item => (
+                        {items.map((item: any) => (
                           <div key={item} style={{ display: "flex", alignItems: "center", gap: 8, padding: "5px 0", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
                             <div style={{ width: 3, height: 3, background: "var(--amber)", borderRadius: "50%", opacity: 0.5 }} />
                             <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--slate)" }}>{item}</span>
