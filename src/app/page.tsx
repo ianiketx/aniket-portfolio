@@ -393,7 +393,7 @@ Available for: Data Analyst, Junior Data Analyst, Analytics roles across the UK`
             </div>
 
             <div style={{ height: 300, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
-              {messages.map((m, i) => (
+              {messages.map((m: any, i: any) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
                   style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                   <div style={{ fontFamily: "var(--mono)", fontSize: 9, color: m.role === "assistant" ? "var(--amber)" : "var(--slate2)", letterSpacing: "0.12em" }}>
@@ -456,7 +456,7 @@ const ProjectModal = ({ project, onClose }: any) => (
           <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--slate2)", marginBottom: 28, paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,0.05)", letterSpacing: "0.06em" }}>{project.org}</div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 28 }}>
-            {project.bullets.map((b, i) => (
+            {project.bullets.map((b: any, i: any) => (
               <motion.div key={i} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
                 style={{ display: "flex", gap: 16, padding: "14px 18px", background: "rgba(240,165,0,0.03)", borderLeft: "2px solid rgba(240,165,0,0.3)" }}>
                 <span style={{ fontFamily: "var(--sans)", fontSize: 14, color: "var(--off)", lineHeight: 1.7 }}>{b}</span>
@@ -467,7 +467,7 @@ const ProjectModal = ({ project, onClose }: any) => (
           <div style={{ paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
             <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--slate2)", letterSpacing: "0.15em", marginBottom: 12 }}>TOOLS & TECHNOLOGIES</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {project.stack.map((s, i) => (
+              {project.stack.map((s: any, i: any) => (
                 <motion.span key={s} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 + i * 0.04 }}
                   className="tag">{s}</motion.span>
               ))}
