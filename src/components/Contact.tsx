@@ -35,7 +35,7 @@ export default function Contact() {
               LinkedIn
             </motion.a>
             <motion.a
-              href="https://github.com/ianiketbansalx"
+              href="https://github.com/ianiketx"
               target="_blank"
               whileHover={{ scale: 1.05 }}
               className="px-8 py-4 glass rounded-lg font-semibold hover:border-blue-400 transition-all"
