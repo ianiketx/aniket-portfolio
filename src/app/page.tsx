@@ -940,4 +940,4 @@ export default function AniketPortfolio() {
       <AIAnalyst />
     </div>
   );
-}
+}// build trigger
