@@ -586,11 +586,11 @@ export default function AniketPortfolio() {
       type: "CURRENT ROLE",
       color: "var(--amber)",
       points: [
-        "Monitor the accuracy and integrity of incoming data daily — acting as a quality gateway between operational teams and downstream reporting, catching errors before they reach senior stakeholders.",
-        "Create, edit and maintain pivot tables and structured reports from multiple database sources to support quality checking, performance tracking and management reporting.",
-        "Build and maintain dashboards and reporting decks designed for non-technical audiences who need to make fast, confident decisions about operational performance.",
-        "Collect data from multiple systems, cleanse it and convert it into structured formats ready for analysis — handling both routine reporting and ad-hoc data investigations.",
-        "Collaborate with operational and commercial teams to understand what they actually need from data, then deliver it clearly and on time across multiple workstreams."
+        "Handle inquiries within the Existing Claims department, ensuring high-quality customer service and accurate data records.
+        "Monitor and update claim data daily to ensure accuracy between frontline care and operational reporting.
+        "Utilize pivot tables and internal databases to track team performance and claim volumes for management.
+        "Cleanse and structure customer interaction data to identify and resolve recurring claim issues.
+        "Collaborate with claims and commercial teams to improve response times and service quality based on data trends.
       ]
     },
     {
