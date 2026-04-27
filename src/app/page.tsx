@@ -214,7 +214,7 @@ const Cursor = () => {
   const cursorRef = useRef(null);
   const trailRef = useRef(null);
   useEffect(() => {
-    const move = (e) => {
+    const move = (e: any) => {
       if (cursorRef.current) { cursorRef.current.style.left = e.clientX + "px"; cursorRef.current.style.top = e.clientY + "px"; }
       if (trailRef.current) { trailRef.current.style.left = e.clientX + "px"; trailRef.current.style.top = e.clientY + "px"; }
     };
