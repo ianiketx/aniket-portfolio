@@ -4,7 +4,6 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Aniket Bansal — Data Analyst</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
@@ -14,8 +13,8 @@ html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
   --ink:#111110;
   --mid:#6E6E6A;
   --faint:#E4E4E0;
-  --serif:'Fraunces',Georgia,serif;
-  --sans:'Inter',system-ui,sans-serif;
+  --serif:Arial,'Helvetica Neue',Helvetica,sans-serif;
+  --sans:Arial,'Helvetica Neue',Helvetica,sans-serif;
 }
 body{background:var(--white);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
 
@@ -24,7 +23,7 @@ body{background:var(--white);color:var(--ink);font-family:var(--sans);font-weigh
 /* NAV */
 nav{position:fixed;top:0;width:100%;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:28px 64px;transition:all 0.4s ease}
 nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:18px 64px;border-bottom:1px solid var(--faint)}
-.logo{font-family:var(--serif);font-size:17px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;font-style:italic}
+.logo{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:0.02em;color:var(--ink);text-decoration:none;font-style:normal}
 .nav-links{display:flex;gap:36px;align-items:center}
 .nav-links a{font-size:13px;font-weight:400;color:var(--mid);text-decoration:none;letter-spacing:0.01em;transition:color 0.2s}
 .nav-links a:hover{color:var(--ink)}
@@ -41,11 +40,11 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 .footer-icon svg{width:14px;height:14px;fill:currentColor}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 88px;border-bottom:1px solid var(--faint)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 64px 88px;border-bottom:1px solid var(--faint)}
 .hero-tag{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:28px}
-.hero-name{font-family:var(--serif);font-size:clamp(88px,13vw,180px);font-weight:300;line-height:0.88;letter-spacing:-0.04em;color:var(--ink)}
-.hero-name em{font-style:italic}
-.hero-tagline{font-family:var(--serif);font-size:clamp(18px,2vw,26px);font-weight:300;font-style:italic;color:var(--mid);margin-top:28px;letter-spacing:-0.01em}
+.hero-name{font-family:var(--sans);font-size:clamp(88px,13vw,180px);font-weight:700;line-height:0.88;letter-spacing:-0.04em;color:var(--ink)}
+.hero-name em{font-style:normal;font-weight:900}
+.hero-tagline{font-family:var(--sans);font-size:clamp(16px,1.8vw,22px);font-weight:400;font-style:normal;color:var(--mid);margin-top:28px;letter-spacing:-0.01em}
 .hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:56px;gap:40px;flex-wrap:wrap}
 .hero-bio{font-size:15px;font-weight:300;line-height:1.75;color:var(--mid);max-width:480px}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
@@ -58,20 +57,20 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--faint)}
 .stat{padding:44px 64px;border-right:1px solid var(--faint)}
 .stat:last-child{border-right:none}
-.stat-n{font-family:var(--serif);font-size:44px;font-weight:300;letter-spacing:-0.03em;line-height:1;margin-bottom:10px}
+.stat-n{font-family:var(--sans);font-size:44px;font-weight:700;letter-spacing:-0.03em;line-height:1;margin-bottom:10px}
 .stat-l{font-size:12px;font-weight:400;color:var(--mid);line-height:1.5}
 
 /* SECTIONS */
 .section{padding:96px 64px;border-bottom:1px solid var(--faint)}
 .section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:64px}
-.section-title{font-family:var(--serif);font-size:clamp(32px,4vw,50px);font-weight:300;letter-spacing:-0.02em;font-style:italic}
+.section-title{font-family:var(--sans);font-size:clamp(28px,3.5vw,44px);font-weight:700;letter-spacing:-0.02em;font-style:normal}
 .section-num{font-size:11px;font-weight:400;color:var(--mid);letter-spacing:0.12em}
 
 /* WORK */
 .work-list{display:flex;flex-direction:column}
 .work-item{display:grid;grid-template-columns:280px 1fr;gap:64px;padding:52px 0;border-top:1px solid var(--faint)}
 .work-item:last-child{border-bottom:1px solid var(--faint)}
-.work-co{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.01em;margin-bottom:10px;line-height:1.2}
+.work-co{font-family:var(--sans);font-size:20px;font-weight:700;letter-spacing:-0.01em;margin-bottom:10px;line-height:1.2}
 .work-period{font-size:12px;color:var(--mid);margin-top:6px;letter-spacing:0.03em}
 .work-loc{font-size:12px;color:var(--mid);margin-top:3px}
 .work-role{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
@@ -91,7 +90,7 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 .proj-card:hover{background:var(--off)}
 .proj-card:hover .proj-arrow{color:var(--ink)}
 .proj-index{font-size:11px;color:var(--mid);letter-spacing:0.1em;margin-bottom:28px}
-.proj-name{font-family:var(--serif);font-size:24px;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.15;margin-bottom:10px}
+.proj-name{font-family:var(--sans);font-size:20px;font-weight:700;font-style:normal;letter-spacing:-0.01em;line-height:1.15;margin-bottom:10px}
 .proj-org{font-size:11px;color:var(--mid);letter-spacing:0.06em;margin-bottom:20px;text-transform:uppercase}
 .proj-desc{font-size:14px;font-weight:300;line-height:1.7;color:var(--mid);margin-bottom:20px}
 .proj-challenge{font-size:13px;font-weight:300;line-height:1.65;color:var(--ink);margin-bottom:8px}
@@ -107,7 +106,7 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 .cert-card{background:var(--white);padding:40px;transition:background 0.2s}
 .cert-card:hover{background:var(--off)}
 .cert-issuer{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
-.cert-name{font-family:var(--serif);font-size:20px;font-weight:400;font-style:italic;letter-spacing:-0.01em;line-height:1.25;margin-bottom:14px}
+.cert-name{font-family:var(--sans);font-size:17px;font-weight:700;font-style:normal;letter-spacing:-0.01em;line-height:1.25;margin-bottom:14px}
 .cert-meta{font-size:12px;color:var(--mid);line-height:1.6}
 .cert-badge{display:inline-block;margin-top:14px;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:100px;background:var(--off);color:var(--mid);border:1px solid var(--faint)}
 .cert-badge.inprogress{background:#FFF8E7;color:#92700A;border-color:#F0D070}
@@ -141,7 +140,7 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 /* EDU */
 .edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--faint);border:1px solid var(--faint)}
 .edu-card{background:var(--white);padding:48px}
-.edu-deg{font-family:var(--serif);font-size:28px;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.2;margin-bottom:16px}
+.edu-deg{font-family:var(--sans);font-size:24px;font-weight:700;font-style:normal;letter-spacing:-0.02em;line-height:1.2;margin-bottom:16px}
 .edu-uni{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:6px}
 .edu-yr{font-size:12px;color:var(--mid);margin-bottom:20px}
 .edu-modules{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:4px}
@@ -172,7 +171,7 @@ nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webki
 
 /* FOOTER */
 footer{padding:56px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
-.footer-name{font-family:var(--serif);font-size:20px;font-weight:400;font-style:italic;margin-bottom:4px}
+.footer-name{font-family:var(--sans);font-size:18px;font-weight:700;font-style:normal;margin-bottom:4px}
 .footer-sub{font-size:12px;color:var(--mid)}
 .footer-right{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
 .footer-right a{font-size:13px;color:var(--mid);text-decoration:none;transition:color 0.2s}
@@ -186,7 +185,7 @@ footer{padding:56px 64px;display:flex;align-items:center;justify-content:space-b
 .modal-x{position:absolute;top:20px;right:20px;width:32px;height:32px;border-radius:50%;background:var(--off);border:none;cursor:pointer;font-size:15px;color:var(--mid);transition:background 0.2s}
 .modal-x:hover{background:var(--faint)}
 .modal-org{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
-.modal-title{font-family:var(--serif);font-size:30px;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.1;margin-bottom:20px}
+.modal-title{font-family:var(--sans);font-size:26px;font-weight:700;font-style:normal;letter-spacing:-0.02em;line-height:1.1;margin-bottom:20px}
 .modal-summary{font-size:15px;font-weight:300;line-height:1.75;color:var(--mid);margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--faint)}
 .modal-block{margin-bottom:24px}
 .modal-block-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:10px}
@@ -231,7 +230,7 @@ footer{padding:56px 64px;display:flex;align-items:center;justify-content:space-b
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="logo" href="#">Aniket Bansal</a>
+  <a class="logo" href="#">AB</a>
   <div class="nav-links">
     <a href="#work">Work</a>
     <a href="#projects">Projects</a>
@@ -246,7 +245,7 @@ footer{padding:56px 64px;display:flex;align-items:center;justify-content:space-b
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">MSc Data Analytics &nbsp;·&nbsp; Junior Data Analyst &nbsp;·&nbsp; Glasgow, UK</div>
+  <div class="hero-tag">MSc Data Analytics &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Glasgow, UK</div>
   <h1 class="hero-name">Aniket<br/><em>Bansal.</em></h1>
   <p class="hero-tagline">Turning raw data into decisions that move organisations forward.</p>
   <div class="hero-bottom">
