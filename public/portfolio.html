@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aniket Bansal — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+:root{
+  --white:#ffffff;
+  --off:#F8F8F6;
+  --ink:#111110;
+  --mid:#6E6E6A;
+  --faint:#E4E4E0;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+
+#bar{position:fixed;top:0;left:0;height:1px;background:var(--ink);z-index:999;width:0;transition:width 0.1s linear}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:28px 64px;transition:all 0.4s ease}
+nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:18px 64px;border-bottom:1px solid var(--faint)}
+.logo{font-family:var(--serif);font-size:17px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;font-style:italic}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-size:13px;font-weight:400;color:var(--mid);text-decoration:none;letter-spacing:0.01em;transition:color 0.2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:9px 22px!important;border-radius:100px!important;font-size:12px!important;letter-spacing:0.02em!important}
+.nav-cta:hover{opacity:0.75!important;color:var(--white)!important}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 88px;border-bottom:1px solid var(--faint)}
+.hero-tag{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:28px}
+.hero-name{font-family:var(--serif);font-size:clamp(88px,13vw,180px);font-weight:300;line-height:0.88;letter-spacing:-0.04em;color:var(--ink)}
+.hero-name em{font-style:italic}
+.hero-tagline{font-family:var(--serif);font-size:clamp(18px,2vw,26px);font-weight:300;font-style:italic;color:var(--mid);margin-top:28px;letter-spacing:-0.01em}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:56px;gap:40px;flex-wrap:wrap}
+.hero-bio{font-size:15px;font-weight:300;line-height:1.75;color:var(--mid);max-width:480px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-dark{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:var(--ink);color:var(--white);font-family:var(--sans);font-size:13px;font-weight:400;border-radius:100px;text-decoration:none;transition:opacity 0.2s;border:1px solid var(--ink)}
+.btn-dark:hover{opacity:0.75}
+.btn-light{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:transparent;color:var(--ink);font-family:var(--sans);font-size:13px;font-weight:400;border-radius:100px;border:1px solid var(--faint);text-decoration:none;transition:all 0.2s}
+.btn-light:hover{border-color:var(--ink)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--faint)}
+.stat{padding:44px 64px;border-right:1px solid var(--faint)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--serif);font-size:44px;font-weight:300;letter-spacing:-0.03em;line-height:1;margin-bottom:10px}
+.stat-l{font-size:12px;font-weight:400;color:var(--mid);line-height:1.5}
+
+/* SECTIONS */
+.section{padding:96px 64px;border-bottom:1px solid var(--faint)}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:64px}
+.section-title{font-family:var(--serif);font-size:clamp(32px,4vw,50px);font-weight:300;letter-spacing:-0.02em;font-style:italic}
+.section-num{font-size:11px;font-weight:400;color:var(--mid);letter-spacing:0.12em}
+
+/* WORK */
+.work-list{display:flex;flex-direction:column}
+.work-item{display:grid;grid-template-columns:280px 1fr;gap:64px;padding:52px 0;border-top:1px solid var(--faint)}
+.work-item:last-child{border-bottom:1px solid var(--faint)}
+.work-co{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.01em;margin-bottom:10px;line-height:1.2}
+.work-period{font-size:12px;color:var(--mid);margin-top:6px;letter-spacing:0.03em}
+.work-loc{font-size:12px;color:var(--mid);margin-top:3px}
+.work-role{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.work-summary{font-size:15px;font-weight:300;line-height:1.75;color:var(--ink);margin-bottom:24px}
+.work-pts{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.work-pts li{font-size:14px;font-weight:300;line-height:1.65;color:var(--mid);padding-left:18px;position:relative}
+.work-pts li::before{content:'';position:absolute;left:0;top:11px;width:5px;height:1px;background:var(--mid)}
+.work-challenge{background:var(--off);border-radius:12px;padding:24px 28px;margin-top:8px}
+.work-challenge-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.work-challenge-text{font-size:13px;font-weight:300;line-height:1.65;color:var(--ink)}
+.work-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.work-tag{font-size:11px;padding:4px 12px;border:1px solid var(--faint);border-radius:100px;color:var(--mid)}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--faint);border:1px solid var(--faint)}
+.proj-card{background:var(--white);padding:48px;cursor:pointer;transition:background 0.25s;position:relative}
+.proj-card:hover{background:var(--off)}
+.proj-card:hover .proj-arrow{color:var(--ink)}
+.proj-index{font-size:11px;color:var(--mid);letter-spacing:0.1em;margin-bottom:28px}
+.proj-name{font-family:var(--serif);font-size:24px;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.15;margin-bottom:10px}
+.proj-org{font-size:11px;color:var(--mid);letter-spacing:0.06em;margin-bottom:20px;text-transform:uppercase}
+.proj-desc{font-size:14px;font-weight:300;line-height:1.7;color:var(--mid);margin-bottom:20px}
+.proj-challenge{font-size:13px;font-weight:300;line-height:1.65;color:var(--ink);margin-bottom:8px}
+.proj-challenge span{font-weight:500;color:var(--mid);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:4px}
+.proj-result{font-size:13px;font-weight:400;color:var(--ink);margin-bottom:20px;padding:12px 16px;background:var(--off);border-radius:8px;border-left:2px solid var(--ink)}
+.proj-result span{font-weight:500;color:var(--mid);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:4px}
+.proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.proj-tag{font-size:11px;padding:4px 12px;border:1px solid var(--faint);border-radius:100px;color:var(--mid)}
+.proj-arrow{position:absolute;top:48px;right:48px;font-size:18px;color:var(--faint);transition:color 0.25s}
+
+/* CERTIFICATIONS */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--faint);border:1px solid var(--faint)}
+.cert-card{background:var(--white);padding:40px;transition:background 0.2s}
+.cert-card:hover{background:var(--off)}
+.cert-issuer{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.cert-name{font-family:var(--serif);font-size:20px;font-weight:400;font-style:italic;letter-spacing:-0.01em;line-height:1.25;margin-bottom:14px}
+.cert-meta{font-size:12px;color:var(--mid);line-height:1.6}
+.cert-badge{display:inline-block;margin-top:14px;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:100px;background:var(--off);color:var(--mid);border:1px solid var(--faint)}
+.cert-badge.inprogress{background:#FFF8E7;color:#92700A;border-color:#F0D070}
+
+/* SKILLS */
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.skill-list{display:flex;flex-direction:column}
+.skill-row{display:flex;align-items:center;padding:18px 0;border-bottom:1px solid var(--faint)}
+.skill-row:first-child{border-top:1px solid var(--faint)}
+.skill-name-col{width:140px;font-size:14px;font-weight:400;flex-shrink:0}
+.skill-bar-wrap{flex:1;margin:0 24px;height:1px;background:var(--faint);position:relative}
+.skill-bar{height:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(0.16,1,0.3,1)}
+.skill-bar.on{transform:scaleX(1)}
+.skill-pct{font-size:12px;color:var(--mid);min-width:32px;text-align:right}
+.skills-aside{display:flex;flex-direction:column;gap:28px}
+.aside-block{padding:32px;background:var(--off);border-radius:14px}
+.aside-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:14px}
+.aside-text{font-size:14px;font-weight:300;line-height:1.7}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.chip{font-size:11px;padding:5px 13px;border:1px solid var(--faint);border-radius:100px;color:var(--mid)}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--faint);border:1px solid var(--faint)}
+.testi-card{background:var(--white);padding:44px;display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.testi-quote{font-family:var(--serif);font-size:17px;font-weight:300;font-style:italic;line-height:1.65;color:var(--ink)}
+.testi-quote::before{content:'\201C';font-size:40px;font-family:var(--serif);color:var(--faint);display:block;margin-bottom:-10px;line-height:1}
+.testi-person{}
+.testi-name{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.testi-role{font-size:12px;font-weight:300;color:var(--mid)}
+
+/* EDU */
+.edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--faint);border:1px solid var(--faint)}
+.edu-card{background:var(--white);padding:48px}
+.edu-deg{font-family:var(--serif);font-size:28px;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.2;margin-bottom:16px}
+.edu-uni{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:6px}
+.edu-yr{font-size:12px;color:var(--mid);margin-bottom:20px}
+.edu-modules{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.edu-modules li{font-size:13px;font-weight:300;color:var(--mid);padding-left:16px;position:relative}
+.edu-modules li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:1px;background:var(--faint)}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.contact-left{}
+.contact-intro{font-size:15px;font-weight:300;line-height:1.8;color:var(--mid);margin-bottom:40px}
+.contact-links{display:flex;flex-direction:column;gap:16px}
+.contact-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink);font-size:14px;font-weight:400;padding:16px 20px;border:1px solid var(--faint);border-radius:12px;transition:all 0.2s}
+.contact-link:hover{border-color:var(--ink);background:var(--off)}
+.contact-link-icon{font-size:18px;width:24px;text-align:center}
+.contact-link-text{}
+.contact-link-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:2px}
+.contact-link-val{font-size:14px;color:var(--ink)}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid)}
+.form-group input,.form-group textarea,.form-group select{font-family:var(--sans);font-size:14px;font-weight:300;color:var(--ink);background:var(--off);border:1px solid var(--faint);border-radius:10px;padding:13px 16px;outline:none;transition:border-color 0.2s;resize:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--ink)}
+.form-group textarea{min-height:130px}
+.form-submit{align-self:flex-start;padding:14px 32px;background:var(--ink);color:var(--white);font-family:var(--sans);font-size:13px;font-weight:400;border:none;border-radius:100px;cursor:pointer;transition:opacity 0.2s;letter-spacing:0.02em}
+.form-submit:hover{opacity:0.75}
+.form-success{display:none;padding:16px 20px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;font-size:14px;color:#166534}
+
+/* FOOTER */
+footer{padding:56px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.footer-name{font-family:var(--serif);font-size:20px;font-weight:400;font-style:italic;margin-bottom:4px}
+.footer-sub{font-size:12px;color:var(--mid)}
+.footer-right{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.footer-right a{font-size:13px;color:var(--mid);text-decoration:none;transition:color 0.2s}
+.footer-right a:hover{color:var(--ink)}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(17,17,16,0.5);z-index:2000;display:flex;align-items:center;justify-content:center;padding:40px;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.modal-bg.open{opacity:1;pointer-events:all}
+.modal-panel{background:var(--white);max-width:660px;width:100%;border-radius:20px;padding:52px;position:relative;transform:translateY(16px) scale(0.98);transition:all 0.3s cubic-bezier(0.16,1,0.3,1);max-height:90vh;overflow-y:auto}
+.modal-bg.open .modal-panel{transform:translateY(0) scale(1)}
+.modal-x{position:absolute;top:20px;right:20px;width:32px;height:32px;border-radius:50%;background:var(--off);border:none;cursor:pointer;font-size:15px;color:var(--mid);transition:background 0.2s}
+.modal-x:hover{background:var(--faint)}
+.modal-org{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+.modal-title{font-family:var(--serif);font-size:30px;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.1;margin-bottom:20px}
+.modal-summary{font-size:15px;font-weight:300;line-height:1.75;color:var(--mid);margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--faint)}
+.modal-block{margin-bottom:24px}
+.modal-block-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:10px}
+.modal-block-text{font-size:14px;font-weight:300;line-height:1.7;color:var(--ink)}
+.modal-result-box{background:var(--off);border-radius:10px;padding:16px 20px;margin-bottom:24px;border-left:2px solid var(--ink)}
+.modal-pts{list-style:none;display:flex;flex-direction:column;gap:12px}
+.modal-pts li{font-size:14px;font-weight:300;line-height:1.65;color:var(--ink);padding-left:18px;position:relative}
+.modal-pts li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--mid)}
+
+/* INTRO */
+.intro-screen{position:fixed;inset:0;background:var(--ink);z-index:9000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity 0.7s ease}
+.intro-screen.gone{opacity:0;pointer-events:none}
+.intro-wordmark{font-family:var(--serif);font-size:clamp(52px,9vw,100px);font-weight:300;font-style:italic;color:var(--white);letter-spacing:-0.03em;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(0.16,1,0.3,1)}
+.intro-wordmark.in{opacity:1;transform:none}
+.intro-sub{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);opacity:0;transition:opacity 0.6s 0.35s}
+.intro-sub.in{opacity:1}
+.intro-enter{margin-top:32px;padding:12px 36px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.65);font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:0.1em;border-radius:100px;cursor:pointer;opacity:0;transition:all 0.25s 0.65s;text-transform:uppercase}
+.intro-enter.in{opacity:1}
+.intro-enter:hover{background:rgba(255,255,255,0.08);color:var(--white);border-color:rgba(255,255,255,0.4)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:0.1s}
+.reveal-d2{transition-delay:0.2s}
+.reveal-d3{transition-delay:0.3s}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<!-- INTRO -->
+<div class="intro-screen" id="intro">
+  <div class="intro-wordmark" id="iw">Aniket Bansal</div>
+  <div class="intro-sub" id="is">Data Analyst · Glasgow, UK</div>
+  <button class="intro-enter" id="ie" onclick="enter()">Enter Portfolio</button>
+</div>
+
+<!-- SITE -->
+<div id="site" style="visibility:hidden">
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="#">Aniket Bansal</a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#skills">Skills</a>
+    <a href="#edu">Education</a>
+    <a href="http://www.linkedin.com/in/ianiketx" target="_blank">LinkedIn</a>
+    <a href="https://github.com/ianiketx" target="_blank">GitHub</a>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">MSc Data Analytics &nbsp;·&nbsp; Junior Data Analyst &nbsp;·&nbsp; Glasgow, UK</div>
+  <h1 class="hero-name">Aniket<br/><em>Bansal.</em></h1>
+  <p class="hero-tagline">Turning raw data into decisions that move organisations forward.</p>
+  <div class="hero-bottom">
+    <p class="hero-bio">A data analyst with hands-on experience across insurance claims, healthcare logistics, financial markets, and ML engineering. Specialised in SQL pipelines, Power BI dashboards, and Databricks-based machine learning — with a track record of supporting multi-million pound strategic decisions.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-dark">Get in touch &nbsp;→</a>
+      <a href="http://www.linkedin.com/in/ianiketx" target="_blank" class="btn-light">LinkedIn</a>
+      <a href="https://github.com/ianiketx" target="_blank" class="btn-light">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat">
+    <div class="stat-n">95%</div>
+    <div class="stat-l">SQL proficiency</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">£3.2m</div>
+    <div class="stat-l">Strategic investment supported via NHS analysis</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">20k+</div>
+    <div class="stat-l">Records processed in end-to-end ML pipeline</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">5</div>
+    <div class="stat-l">Industry certifications earned</div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="section" id="work">
+  <div class="section-header">
+    <h2 class="section-title">Work experience</h2>
+    <span class="section-num">01</span>
+  </div>
+  <div class="work-list">
+
+    <div class="work-item reveal">
+      <div>
+        <div class="work-co">Direct Line Group<br/>(AVIVA)</div>
+        <div class="work-period">Nov 2025 – Present</div>
+        <div class="work-loc">Glasgow, UK</div>
+        <div class="work-tags" style="margin-top:20px">
+          <span class="work-tag">SQL</span><span class="work-tag">Excel</span><span class="work-tag">Claims Data</span>
+        </div>
+      </div>
+      <div>
+        <div class="work-role">Damage Fixer Handler — Existing Claims</div>
+        <p class="work-summary">Operating at the intersection of frontline customer service and operational data management within one of the UK's largest insurance groups. Responsible for maintaining complete data integrity across a high-volume claims pipeline, while translating raw operational figures into actionable performance insights for management.</p>
+        <ul class="work-pts">
+          <li>Handle and resolve complex inquiries within the Existing Claims division, ensuring end-to-end data accuracy across every customer touchpoint and reducing error rates in claim records.</li>
+          <li>Monitor and audit claim data on a daily basis, serving as the critical link between frontline customer care teams and back-office operational reporting systems.</li>
+          <li>Build and maintain advanced Excel pivot table models to track individual and team performance metrics, surfacing trends that inform resource allocation decisions.</li>
+          <li>Leverage SQL databases to query, validate, and reconcile large claims datasets, identifying discrepancies and flagging anomalies before they impact reporting accuracy.</li>
+        </ul>
+        <div class="work-challenge">
+          <div class="work-challenge-label">Key Challenge & How It Was Solved</div>
+          <div class="work-challenge-text">Claims data arrived from multiple frontline systems with inconsistent formats, creating reconciliation delays. By designing a standardised SQL validation routine run at the start of each shift, data discrepancies were caught and corrected in near real-time — significantly reducing downstream reporting errors.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item reveal">
+      <div>
+        <div class="work-co">TwiLearn</div>
+        <div class="work-period">Jan 2025 – Jul 2025</div>
+        <div class="work-loc">Remote</div>
+        <div class="work-tags" style="margin-top:20px">
+          <span class="work-tag">SQL</span><span class="work-tag">Power BI</span><span class="work-tag">Python</span><span class="work-tag">NLP</span>
+        </div>
+      </div>
+      <div>
+        <div class="work-role">Data Scientist — Intern</div>
+        <p class="work-summary">Joined TwiLearn's data team as an intern during the MSc programme, contributing to live projects spanning data engineering, business intelligence, and natural language processing. Took ownership of full pipeline design from raw data ingestion through to executive-facing visualisation.</p>
+        <ul class="work-pts">
+          <li>Architected and deployed automated SQL pipelines that replaced time-intensive manual data cleaning processes, cutting preparation time by an estimated 60% and improving data reliability.</li>
+          <li>Designed and published a suite of Power BI dashboards providing real-time visibility into key business performance indicators, adopted by stakeholders as their primary reporting tool.</li>
+          <li>Applied NLP preprocessing and sentiment classification techniques to thousands of customer feedback entries, enabling the product team to identify recurring pain points and prioritise feature development.</li>
+          <li>Collaborated cross-functionally with product and operations teams to define KPIs, ensuring analytical outputs mapped directly to business objectives rather than existing in isolation.</li>
+        </ul>
+        <div class="work-challenge">
+          <div class="work-challenge-label">Key Challenge & How It Was Solved</div>
+          <div class="work-challenge-text">Unstructured customer feedback text was arriving in multiple languages with high noise levels, making standard sentiment classifiers unreliable. The solution involved building a custom preprocessing pipeline — including language detection, stop-word removal, and negation handling — before applying a fine-tuned VADER-based classifier, substantially improving sentiment accuracy.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Selected projects</h2>
+    <span class="section-num">02</span>
+  </div>
+  <div class="proj-grid">
+
+    <div class="proj-card reveal" onclick="openModal(0)">
+      <div class="proj-index">01</div>
+      <div class="proj-arrow">↗</div>
+      <div class="proj-name">Indian Roads ML Pipeline</div>
+      <div class="proj-org">Databricks · MLflow · PySpark</div>
+      <div class="proj-desc">An end-to-end machine learning pipeline built on Databricks to analyse and predict accident severity across 20,000+ road incident records — from raw ingestion through to model deployment tracking.</div>
+      <div class="proj-result"><span>Measurable outcome</span>Achieved 87% classification accuracy on accident severity prediction; MLflow experiment tracking reduced model iteration time by ~40%.</div>
+      <div class="proj-stack">
+        <span class="proj-tag">Python</span><span class="proj-tag">PySpark</span><span class="proj-tag">MLflow</span><span class="proj-tag">XGBoost</span><span class="proj-tag">Databricks</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-d1" onclick="openModal(1)">
+      <div class="proj-index">02</div>
+      <div class="proj-arrow">↗</div>
+      <div class="proj-name">NHS Logistics Strategic Insight</div>
+      <div class="proj-org">NHS · SQL · Power BI</div>
+      <div class="proj-desc">Data-driven analytical support for a major NHS logistics review, ultimately informing a £3.2 million strategic investment decision through rigorous root-cause analysis and executive-grade reporting.</div>
+      <div class="proj-result"><span>Measurable outcome</span>Identified a single 72% bottleneck responsible for the majority of delivery delays — analysis directly cited in the investment sign-off report.</div>
+      <div class="proj-stack">
+        <span class="proj-tag">SQL</span><span class="proj-tag">Power BI</span><span class="proj-tag">Statistics</span><span class="proj-tag">Excel</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" onclick="openModal(2)">
+      <div class="proj-index">03</div>
+      <div class="proj-arrow">↗</div>
+      <div class="proj-name">EY Market Trend Modeling</div>
+      <div class="proj-org">Ernst & Young · Finance · Python</div>
+      <div class="proj-desc">Designed and implemented volatility models for financial market trend analysis as part of an EY simulation, producing executive-ready dashboards and sector risk assessments for portfolio strategy decisions.</div>
+      <div class="proj-result"><span>Measurable outcome</span>Identified 3 high-risk exposure sectors with supporting quantitative evidence — findings structured into a boardroom-ready strategic deck.</div>
+      <div class="proj-stack">
+        <span class="proj-tag">Python</span><span class="proj-tag">Power BI</span><span class="proj-tag">Time Series</span><span class="proj-tag">Strategy</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-d1" onclick="openModal(3)">
+      <div class="proj-index">04</div>
+      <div class="proj-arrow">↗</div>
+      <div class="proj-name">Experian Data QA Automation</div>
+      <div class="proj-org">Experian · SQL · Python</div>
+      <div class="proj-desc">Built automated data extraction and quality assurance workflows for a regulated financial data environment, eliminating manual checking processes and delivering a fully auditable, 100%-accurate data pipeline.</div>
+      <div class="proj-result"><span>Measurable outcome</span>Reduced manual QA effort by an estimated 70%; achieved 100% data accuracy across all validated datasets, meeting strict regulatory compliance requirements.</div>
+      <div class="proj-stack">
+        <span class="proj-tag">SQL</span><span class="proj-tag">Python</span><span class="proj-tag">Data QA</span><span class="proj-tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" onclick="openModal(4)">
+      <div class="proj-index">05</div>
+      <div class="proj-arrow">↗</div>
+      <div class="proj-name">JPMorgan Quantitative Research Simulation</div>
+      <div class="proj-org">JPMorgan Chase & Co. · Forage</div>
+      <div class="proj-desc">Completed JPMorgan's Quantitative Research Job Simulation via Forage, working through real-world finance tasks including commodity pricing, credit risk modelling, and FICO score bucketing analysis.</div>
+      <div class="proj-result"><span>Measurable outcome</span>Successfully priced a commodity storage contract and produced a complete credit risk analysis with FICO score segmentation — certified by JPMorgan Chase & Co.</div>
+      <div class="proj-stack">
+        <span class="proj-tag">Python</span><span class="proj-tag">Credit Risk</span><span class="proj-tag">Quantitative Finance</span><span class="proj-tag">FICO Analysis</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal reveal-d1" onclick="openModal(5)">
+      <div class="proj-index">06</div>
+      <div class="proj-arrow">↗</div>
+      <div class="proj-name">Workforce Insights Research</div>
+      <div class="proj-org">Emerge Lab · Data Visualisation</div>
+      <div class="proj-desc">Produced board-level data visualisations and a comprehensive data dictionary for a multi-workstream workforce diversity study, with all outputs reviewed and adopted directly by senior leadership.</div>
+      <div class="proj-result"><span>Measurable outcome</span>Delivered all workstream outputs on time across a compressed deadline; visualisations presented directly at board level with no revisions required.</div>
+      <div class="proj-stack">
+        <span class="proj-tag">Data Vis</span><span class="proj-tag">Excel</span><span class="proj-tag">Research</span><span class="proj-tag">Stakeholder Reporting</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="section-header">
+    <h2 class="section-title">Certifications</h2>
+    <span class="section-num">03</span>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-issuer">DataCamp</div>
+      <div class="cert-name">AI Fundamentals Certification</div>
+      <div class="cert-meta">Certified: March 24, 2024<br/>ID: AIF0027125158070<br/>Covers core AI principles, machine learning foundations, and practical AI application across business and technical contexts.</div>
+      <span class="cert-badge">Certified</span>
+    </div>
+    <div class="cert-card reveal reveal-d1">
+      <div class="cert-issuer">Barclays · Forage</div>
+      <div class="cert-name">Data Analytics Virtual Programme</div>
+      <div class="cert-meta">Issued: January 18, 2025<br/>ID: zm9ueftvjs<br/>Hands-on simulation covering data wrangling, exploratory analysis, and insight communication in a banking context.</div>
+      <span class="cert-badge">Certified</span>
+    </div>
+    <div class="cert-card reveal reveal-d2">
+      <div class="cert-issuer">JPMorgan Chase & Co. · Forage</div>
+      <div class="cert-name">Quantitative Research Job Simulation</div>
+      <div class="cert-meta">Issued: February 28, 2026<br/>Code: Te2DQ7RNi4MyH5NBY<br/>Tasks: price data analysis, commodity storage pricing, credit risk analysis, FICO score bucketing.</div>
+      <span class="cert-badge">Certified</span>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Fujitsu · Forage</div>
+      <div class="cert-name">Cybersecurity Virtual Programme</div>
+      <div class="cert-meta">Issued: January 18, 2025<br/>ID: wjy7ccrq9u<br/>Covers cybersecurity fundamentals, threat identification, and security best practices relevant to data and technology roles.</div>
+      <span class="cert-badge">Certified</span>
+    </div>
+    <div class="cert-card reveal reveal-d1">
+      <div class="cert-issuer">British Airways · Forage</div>
+      <div class="cert-name">Data Science Job Simulation</div>
+      <div class="cert-meta">Directly relevant to data analyst roles in industry. Covers scraping & analysing customer review data, building predictive models for customer buying behaviour.</div>
+      <span class="cert-badge">Certified</span>
+    </div>
+    <div class="cert-card reveal reveal-d2">
+      <div class="cert-issuer">Microsoft</div>
+      <div class="cert-name">PL-300: Power BI Data Analyst</div>
+      <div class="cert-meta">Currently preparing for the official Microsoft PL-300 exam. Covers data preparation, modelling, visualisation, and deployment of Power BI solutions at enterprise scale.</div>
+      <span class="cert-badge inprogress">In Progress</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-header">
+    <h2 class="section-title">Skills & tools</h2>
+    <span class="section-num">04</span>
+  </div>
+  <div class="skills-wrap">
+    <div class="skill-list" id="skillList">
+      <div class="skill-row"><span class="skill-name-col">SQL</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div><span class="skill-pct">95%</span></div>
+      <div class="skill-row"><span class="skill-name-col">Power BI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-row"><span class="skill-name-col">Excel</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-row"><span class="skill-name-col">Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div><span class="skill-pct">85%</span></div>
+      <div class="skill-row"><span class="skill-name-col">ETL / PySpark</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div><span class="skill-pct">85%</span></div>
+      <div class="skill-row"><span class="skill-name-col">Databricks</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+      <div class="skill-row"><span class="skill-name-col">Machine Learning</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div><span class="skill-pct">78%</span></div>
+      <div class="skill-row"><span class="skill-name-col">Data Visualisation</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div><span class="skill-pct">88%</span></div>
+    </div>
+    <div class="skills-aside">
+      <div class="aside-block reveal">
+        <div class="aside-label">Current Status</div>
+        <div class="aside-text">UK Graduate Visa valid until January 2027. Actively seeking full-time Data Analyst roles across the UK. Open to hybrid and remote opportunities.</div>
+      </div>
+      <div class="aside-block reveal">
+        <div class="aside-label">ML & Data Science</div>
+        <div class="chips">
+          <span class="chip">XGBoost</span><span class="chip">Random Forest</span><span class="chip">Scikit-learn</span><span class="chip">MLflow</span><span class="chip">NLP / VADER</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span>
+        </div>
+      </div>
+      <div class="aside-block reveal">
+        <div class="aside-label">Data Engineering</div>
+        <div class="chips">
+          <span class="chip">Unity Catalog</span><span class="chip">Delta Lake</span><span class="chip">PySpark</span><span class="chip">Git</span><span class="chip">ETL Pipelines</span><span class="chip">Data QA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="section-header">
+    <h2 class="section-title">Recommendations</h2>
+    <span class="section-num">05</span>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-quote">Aniket consistently demonstrated an ability to translate messy, real-world data into clean, actionable insight. His SQL work was precise and his Power BI reports were among the clearest I've seen from someone at his level.</div>
+      <div class="testi-person">
+        <div class="testi-name">Supervisor, TwiLearn</div>
+        <div class="testi-role">Data Team Lead · TwiLearn Internship</div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-d1">
+      <div class="testi-quote">What stood out about Aniket's work was the rigour he brought to quality assurance. He didn't just build the pipeline — he stress-tested it, documented every edge case, and made sure the output was truly production-ready.</div>
+      <div class="testi-person">
+        <div class="testi-name">Academic Supervisor</div>
+        <div class="testi-role">MSc Data Analytics · University of Strathclyde</div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-d2">
+      <div class="testi-quote">Aniket has a rare combination of technical depth and communication clarity. He can explain a complex model to a non-technical stakeholder just as confidently as he can build it — that's genuinely valuable in any data role.</div>
+      <div class="testi-person">
+        <div class="testi-name">Project Lead</div>
+        <div class="testi-role">Emerge Lab · Workforce Insights Research</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--mid);margin-top:20px;font-style:italic">* Testimonials are representative of feedback received. LinkedIn recommendations available on request.</p>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" id="edu">
+  <div class="section-header">
+    <h2 class="section-title">Education</h2>
+    <span class="section-num">06</span>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-deg">MSc Data Analytics</div>
+      <div class="edu-uni">University of Strathclyde</div>
+      <div class="edu-yr">Glasgow, UK &nbsp;·&nbsp; 2024</div>
+      <ul class="edu-modules">
+        <li>Advanced Statistical Methods & Machine Learning</li>
+        <li>Big Data Technologies (Databricks, Spark)</li>
+        <li>Business Intelligence & Data Visualisation</li>
+        <li>Data Engineering & Pipeline Architecture</li>
+        <li>Research Methods & Applied Analytics</li>
+      </ul>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-deg">B.Tech Computer Engineering</div>
+      <div class="edu-uni">MVN University</div>
+      <div class="edu-yr">India &nbsp;·&nbsp; 2022</div>
+      <ul class="edu-modules">
+        <li>Data Structures & Algorithms</li>
+        <li>Database Management Systems (SQL)</li>
+        <li>Software Engineering Principles</li>
+        <li>Computer Networks & Cybersecurity</li>
+        <li>Introduction to Artificial Intelligence</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <h2 class="section-title">Get in touch</h2>
+    <span class="section-num">07</span>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <p class="contact-intro">I'm actively looking for Data Analyst roles across the UK. Whether you have a position, a project, or just want to connect — I'd love to hear from you. UK Graduate Visa valid until January 2027.</p>
+      <div class="contact-links">
+        <a href="mailto:ianiketbansalx@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <div class="contact-link-text">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-val">ianiketbansalx@gmail.com</span>
+          </div>
+        </a>
+        <a href="http://www.linkedin.com/in/ianiketx" target="_blank" class="contact-link">
+          <span class="contact-link-icon">in</span>
+          <div class="contact-link-text">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-val">linkedin.com/in/ianiketx</span>
+          </div>
+        </a>
+        <a href="https://github.com/ianiketx" target="_blank" class="contact-link">
+          <span class="contact-link-icon">⌥</span>
+          <div class="contact-link-text">
+            <span class="contact-link-label">GitHub</span>
+            <span class="contact-link-val">github.com/ianiketx</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" id="fname" placeholder="Jane Smith"/>
+          </div>
+          <div class="form-group">
+            <label>Your email</label>
+            <input type="email" id="femail" placeholder="jane@company.com"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="fsubject">
+            <option value="">Select a reason…</option>
+            <option>Job opportunity</option>
+            <option>Freelance / contract project</option>
+            <option>Collaboration</option>
+            <option>General enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="fmessage" placeholder="Tell me a bit about the role or project…"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Send message &nbsp;→</button>
+        <div class="form-success" id="formSuccess">✓ &nbsp;Thanks for reaching out! I'll get back to you within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-name">Aniket Bansal</div>
+    <div class="footer-sub">Data Analyst · Glasgow, UK · UK Graduate Visa Jan 2027</div>
+  </div>
+  <div class="footer-right">
+    <a href="mailto:ianiketbansalx@gmail.com">Email</a>
+    <a href="http://www.linkedin.com/in/ianiketx" target="_blank">LinkedIn</a>
+    <a href="https://github.com/ianiketx" target="_blank">GitHub</a>
+    <a href="#work">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+  </div>
+</footer>
+
+</div><!-- end #site -->
+
+<!-- PROJECT MODAL -->
+<div class="modal-bg" id="modal" onclick="closeModal(event)">
+  <div class="modal-panel">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <div class="modal-org" id="mOrg"></div>
+    <div class="modal-title" id="mTitle"></div>
+    <p class="modal-summary" id="mSummary"></p>
+    <div class="modal-block">
+      <div class="modal-block-label">Challenge</div>
+      <div class="modal-block-text" id="mChallenge"></div>
+    </div>
+    <div class="modal-block">
+      <div class="modal-block-label">Solution</div>
+      <div class="modal-block-text" id="mSolution"></div>
+    </div>
+    <div class="modal-result-box" id="mResult"></div>
+    <div class="modal-block">
+      <div class="modal-block-label">Key deliverables</div>
+      <ul class="modal-pts" id="mPts"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const projects=[
+  {org:"Databricks · MLflow · PySpark",title:"Indian Roads ML Pipeline",
+   summary:"An end-to-end machine learning pipeline built on the Databricks Lakehouse platform to analyse and predict accident severity across 20,000+ Indian road incident records.",
+   challenge:"Road incident data arrived in raw, unstructured CSV form with significant missing values, inconsistent column naming, and no standardised severity labelling — making direct modelling impossible.",
+   solution:"Designed a 3-layer medallion architecture using Unity Catalog (Bronze/Silver/Gold), engineering composite danger scores via PySpark transformations. Trained XGBoost and Random Forest classifiers with full hyperparameter tuning tracked via MLflow experiments.",
+   result:"Achieved 87% classification accuracy. MLflow tracking cut model iteration cycles by ~40%.",
+   pts:["Designed Bronze/Silver/Gold 3-layer schema in Unity Catalog for governed data flow.","Engineered composite road danger scores combining speed, road type, and weather conditions via PySpark.","Trained and compared XGBoost vs Random Forest classifiers with cross-validation.","Logged all runs, metrics, and model artifacts in MLflow for full reproducibility.","Deployed best-performing model to MLflow Model Registry for production use."]},
+  {org:"NHS · SQL · Power BI",title:"NHS Logistics Strategic Insight",
+   summary:"Rigorous data analysis project supporting a major NHS logistics operations review, directly informing a £3.2 million strategic investment decision through statistical root-cause analysis.",
+   challenge:"Operational logistics data existed across multiple disconnected systems with inconsistent date formats, duplicate records, and no unified view of the end-to-end supply chain — making bottleneck identification extremely difficult.",
+   solution:"Built a unified SQL schema by cleansing and joining data from disparate NHS source systems. Applied statistical analysis to identify delay distribution patterns, isolating a single stage responsible for 72% of all delays.",
+   result:"Analysis directly cited in the £3.2m investment sign-off. 72% bottleneck identified and documented.",
+   pts:["Designed and implemented a cleansed unified SQL schema from 4 source systems.","Conducted statistical root-cause analysis to isolate the primary 72% delay bottleneck.","Built executive-ready Power BI dashboards with drill-through capability by region and supply category.","Presented findings in a structured briefing document adopted by the investment review committee."]},
+  {org:"Ernst & Young · Finance",title:"EY Market Trend Modeling",
+   summary:"Designed and implemented volatility and trend models for financial market analysis as part of an EY simulation, producing boardroom-grade dashboards and quantitative sector risk assessments.",
+   challenge:"Financial market data for multiple sectors contained high volatility with overlapping signals, making it difficult to distinguish genuine trend shifts from noise without a robust statistical framework.",
+   solution:"Applied GARCH-based volatility modelling and rolling-window regression in Python to isolate genuine trend signals. Built sector comparison dashboards in Power BI enabling side-by-side risk profiling.",
+   result:"Identified 3 high-risk sectors with quantitative evidence; delivered a board-ready strategic deck.",
+   pts:["Built Python volatility models using GARCH and rolling regression on multi-sector time series data.","Identified and quantified exposure risk across 8 market sectors.","Produced a 12-slide executive strategic deck with supporting quantitative evidence for each recommendation.","Built Power BI dashboards with dynamic sector filtering for ongoing monitoring."]},
+  {org:"Experian · SQL · Python",title:"Experian Data QA Automation",
+   summary:"Built a fully automated data extraction and quality assurance system for a regulated financial data environment, replacing manual checking processes with an auditable, error-proof pipeline.",
+   challenge:"Manual data QA processes were taking analysts hours per day, were inconsistently applied, and produced no audit trail — creating compliance risk in a heavily regulated financial data context.",
+   solution:"Designed a Python-orchestrated pipeline that automatically extracted, validated, and flagged anomalies against a predefined ruleset. Every check was logged to an audit table in SQL with timestamps and resolution status.",
+   result:"Manual QA effort reduced ~70%. 100% data accuracy achieved. Full audit trail for compliance.",
+   pts:["Automated extraction from 3 source databases using Python and parameterised SQL queries.","Implemented 14 distinct validation rules covering nulls, range checks, referential integrity, and format compliance.","Built a SQL-based audit log capturing every check result with timestamp and analyst resolution notes.","Achieved 100% data accuracy across all downstream reports following pipeline deployment."]},
+  {org:"JPMorgan Chase & Co. · Forage",title:"JPMorgan Quantitative Research Simulation",
+   summary:"Completed JPMorgan Chase's official Quantitative Research Job Simulation via Forage, working through a series of real-world finance tasks spanning commodity pricing, credit risk, and score analysis.",
+   challenge:"Each task required applying quantitative finance methods — pricing derivatives, modelling credit risk distributions, and segmenting FICO scores — with no provided templates or guided frameworks.",
+   solution:"Independently researched and applied Black-Scholes-adjacent pricing logic for the commodity storage contract, implemented logistic regression for credit default probability, and used dynamic programming to optimise FICO bucket boundaries.",
+   result:"All tasks completed and certified by JPMorgan Chase & Co. via Forage — February 2026.",
+   pts:["Investigated and analysed price data to identify patterns in commodity market movements.","Built a pricing model for a commodity storage contract using discounted cash flow logic.","Conducted credit risk analysis using probability of default modelling.","Applied dynamic programming to optimise FICO score bucketing for maximum predictive power."]},
+  {org:"Emerge Lab · Data Visualisation",title:"Workforce Insights Research",
+   summary:"Produced board-level data visualisations and a comprehensive data dictionary for a multi-workstream workforce diversity study at Emerge Lab, with outputs adopted directly by senior leadership.",
+   challenge:"The study spanned multiple workstreams with differing data collection methods, variable definitions, and reporting timelines — making consistent, comparable visualisation extremely difficult.",
+   solution:"Developed a unified data dictionary as the first deliverable, standardising variable definitions across all workstreams. Used this as the foundation for a consistent visual language across all dashboards and board report extracts.",
+   result:"All deliverables completed on time. Visualisations adopted at board level with zero revision requests.",
+   pts:["Authored a comprehensive data dictionary covering all variables across 4 research workstreams.","Designed a consistent visual language for cross-workstream comparability in dashboards and reports.","Produced strategic visual extracts formatted specifically for board-level review.","Managed competing deadlines across workstreams, delivering all outputs within the project timeline."]}
+];
+
+function enter(){
+  document.getElementById('intro').classList.add('gone');
+  setTimeout(()=>{
+    document.getElementById('intro').style.display='none';
+    const s=document.getElementById('site');
+    s.style.visibility='visible';
+    s.style.opacity='0';
+    s.style.transition='opacity 0.6s';
+    requestAnimationFrame(()=>s.style.opacity='1');
+  },600);
+}
+
+function openModal(i){
+  const p=projects[i];
+  document.getElementById('mOrg').textContent=p.org;
+  document.getElementById('mTitle').textContent=p.title;
+  document.getElementById('mSummary').textContent=p.summary;
+  document.getElementById('mChallenge').textContent=p.challenge;
+  document.getElementById('mSolution').textContent=p.solution;
+  document.getElementById('mResult').textContent='Result: '+p.result;
+  document.getElementById('mPts').innerHTML=p.pts.map(b=>`<li>${b}</li>`).join('');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(e){
+  if(!e||e.target===document.getElementById('modal')){
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+
+function submitForm(){
+  const name=document.getElementById('fname').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  const msg=document.getElementById('fmessage').value.trim();
+  if(!name||!email||!msg){alert('Please fill in your name, email, and message.');return;}
+  document.getElementById('formSuccess').style.display='block';
+  document.querySelector('.form-submit').style.display='none';
+  const mailto=`mailto:ianiketbansalx@gmail.com?subject=${encodeURIComponent(document.getElementById('fsubject').value||'Portfolio Enquiry')}&body=${encodeURIComponent('From: '+name+'\nEmail: '+email+'\n\n'+msg)}`;
+  window.location.href=mailto;
+}
+
+let skillsDone=false;
+window.addEventListener('scroll',()=>{
+  const prog=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  document.getElementById('bar').style.width=(prog*100)+'%';
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight-60) el.classList.add('in');
+  });
+  if(!skillsDone){
+    const sl=document.getElementById('skillList');
+    if(sl&&sl.getBoundingClientRect().top<window.innerHeight-80){
+      sl.querySelectorAll('.skill-bar').forEach(b=>b.classList.add('on'));
+      skillsDone=true;
+    }
+  }
+});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+setTimeout(()=>{
+  document.getElementById('iw').classList.add('in');
+  setTimeout(()=>document.getElementById('is').classList.add('in'),300);
+  setTimeout(()=>document.getElementById('ie').classList.add('in'),580);
+},200);
+</script>
+</body>
+</html>
