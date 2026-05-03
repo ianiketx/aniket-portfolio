@@ -1,64 +1,49 @@
-/* --- Liquid Launch Button --- */
-.launch-overlay {
-  position: fixed;
-  inset: 0;
-  background: #08080f; /* Matches your --ink variable */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
+/* --- High-Contrast Noir Aesthetic --- */
+:root {
+  --bg: #050508;
+  --accent: #f0a500;
+  --text-dim: #94a3b8;
+  --line: rgba(248, 250, 252, 0.05);
 }
 
-.box {
-  width: 200px;
-  height: 200px;
-  border: none;
+.box { /* The Launch Button */
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--mono);
+  letter-spacing: 2px;
   cursor: pointer;
-  font: 700 14px var(--mono); /* Matches your font variables */
-  background-color: #2d4db8;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(240, 165, 0, 0.1);
+}
+
+.box:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 50px rgba(240, 165, 0, 0.3);
+}
+
+.card-premium {
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 40px;
   transition: all 0.4s ease;
-  position: relative;
-  box-shadow: 0 0 18px 0 rgba(73, 115, 255, 0.6);
 }
 
-.box:hover { background-color: #4973ff; }
-.box span { color: #fff; letter-spacing: 2px; position: relative; z-index: 10; }
-
-.box i {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-color: inherit;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+.card-premium:hover {
+  border-color: rgba(240, 165, 0, 0.3);
+  background: rgba(240, 165, 0, 0.02);
 }
 
-.box i:after {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  top: 80%; /* Start low */
-  left: 50%;
-  border-radius: 40%;
-  background-color: rgba(8, 8, 15, 0.5); /* Fills with your background color */
-  animation: animate 10s linear infinite;
-  transform: translate(-50%, -75%);
-  transition: top 1s;
+.nav-link {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: color 0.3s;
 }
 
-.box:hover i:after {
-  top: 20%; /* Fill up on hover */
-  animation: animate 5s linear infinite;
-}
-
-@keyframes animate {
-  0% { transform: translate(-50%, -75%) rotate(0deg); }
-  100% { transform: translate(-50%, -75%) rotate(360deg); }
-}
+.nav-link:hover { color: var(--accent); }
