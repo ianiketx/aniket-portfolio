@@ -43,9 +43,7 @@ const GlobalStyles = () => (
     .card-premium { background: rgba(13,13,24,0.7); border: 1px solid var(--line2); backdrop-filter: blur(16px); }
     .tag { font-family: var(--mono); font-size: 10px; padding: 3px 10px; border: 1px solid rgba(240,165,0,0.2); color: var(--slate); background: rgba(240,165,0,0.04); }
     .btn-outline { font-family: var(--mono); font-size: 11px; padding: 10px 24px; color: var(--amber); border: 1px solid rgba(240,165,0,0.4); text-decoration: none; display: inline-block; transition: 0.2s; }
-    .btn-outline:hover { background: rgba(240,165,0,0.08); }
-
-    /* Social Icons */
+    
     .social-container { list-style: none; display: flex; gap: 20px; }
     .icon-content { position: relative; }
     .icon-content .tooltip { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 4px 8px; border-radius: 4px; opacity: 0; visibility: hidden; font-size: 11px; transition: 0.3s; z-index: 100; }
@@ -79,7 +77,7 @@ const Cursor = () => {
 };
 
 const DataTicker = () => {
-  const items = ["SQL ████ 95", "POWER BI ████ 90", "PYTHON ████ 85", "STATISTICAL ANALYSIS ████ 88", "DATABRICKS ████ 80", "ETL PIPELINES ████ 85", "GLASGOW, UK 🇬🇧", "AVAILABLE NOW"];
+  const items = ["SQL ████ 95", "POWER BI ████ 90", "PYTHON ████ 85", "STATISTICAL ANALYSIS ████ 88", "DATABRICKS ████ 80", "GLASGOW, UK 🇬🇧"];
   return (
     <div style={{ overflow: "hidden", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", padding: "10px 0", background: "rgba(240,165,0,0.03)" }}>
       <div style={{ display: "flex", gap: "48px", animation: "ticker 40s linear infinite", whiteSpace: "nowrap", width: "max-content" }}>
@@ -119,7 +117,7 @@ const FadeSection = ({ children, delay = 0 }: any) => {
   );
 };
 
-// ─── MAIN PORTFOLIO ───────────────────────────────────────────────────────────
+// ─── MAIN APP ─────────────────────────────────────────────────────────────────
 
 export default function AniketPortfolio() {
   const [isLaunched, setIsLaunched] = useState(false);
@@ -136,6 +134,147 @@ export default function AniketPortfolio() {
 
   const projects = [
     {
-      id: "p1", title: "Indian Roads Accident Analysis", org: "Databricks · Python · MLflow",
-      summary: "End-to-end ML pipeline on Databricks analyzing 20k records with Unity Catalog governance.",
-      bullets: ["Designed three-layer Unity Catalog schema (raw → processed → features
+      id: "p1", title: "Indian Roads Accident Analysis", org: "Databricks · Python",
+      summary: "End-to-end ML pipeline analyzing 20k records with Unity Catalog.",
+      bullets: ["Designed 3-layer Unity Catalog schema.", "Engineered custom danger scores using PySpark.", "Trained XGBoost classifiers.", "Tracked experiments via MLflow."],
+      stack: ["Python", "PySpark", "Databricks", "MLflow"]
+    },
+    {
+      id: "p2", title: "NHS Logistics Analysis", org: "NHS · SQL · Power BI",
+      summary: "Operational analysis supporting a £3.2m investment.",
+      bullets: ["Cleansed complex healthcare data.", "Identified 72% delay bottleneck.", "Executive Power BI reporting."],
+      stack: ["SQL", "Power BI", "Statistics"]
+    }
+  ];
+
+  const experience = [
+    {
+      role: "Damage Fixer Handler — Existing Claims",
+      company: "Direct Line Group (AVIVA)",
+      location: "Glasgow, UK",
+      period: "Nov 2025 – Present",
+      points: [
+        "Handle and resolve inquiries within Existing Claims, ensuring data accuracy.",
+        "Monitor claim data daily to bridge frontline care and operational reporting.",
+        "Utilize pivot tables and internal databases to track performance insights."
+      ]
+    }
+  ];
+
+  return (
+    <div style={{ background: "var(--ink)", minHeight: "100vh" }}>
+      <GlobalStyles />
+      <Cursor />
+
+      <AnimatePresence>
+        {!isLaunched && (
+          <motion.div className="launch-overlay" exit={{ opacity: 0, scale: 1.1 }} transition={{ duration: 0.6 }}>
+            <button className="box" onClick={() => setIsLaunched(true)}>
+              <span>Enter<br/>Portfolio</span>
+              <i></i>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {isLaunched && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div className="grid-bg" />
+          <motion.div style={{ position: "fixed", top: 0, left: 0, right: 0, height: "2px", scaleX, background: "var(--amber)", zIndex: 1000, transformOrigin: "0%" }} />
+
+          <nav style={{ position: "fixed", top: 0, width: "100%", zIndex: 500, padding: "0 40px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", background: scrolled ? "rgba(8,8,15,0.9)" : "transparent", backdropFilter: "blur(10px)" }}>
+            <div style={{ fontFamily: "var(--mono)", color: "var(--amber)", fontWeight: "bold" }}>AB</div>
+            <div style={{ display: "flex", gap: 32 }}>
+              <a href="#work" className="nav-link">Work</a>
+              <a href="#projects" className="nav-link">Projects</a>
+              <a href="#skills" className="nav-link">Skills</a>
+            </div>
+          </nav>
+
+          <main style={{ position: "relative", zIndex: 10 }}>
+            <section style={{ minHeight: "100vh", padding: "120px 80px", maxWidth: 1200, margin: "0 auto", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+                <span className="live-dot" />
+                <span className="section-label">Junior Data Analyst · Glasgow, UK</span>
+              </div>
+              <h1 className="display-heading" style={{ fontSize: "clamp(48px, 8vw, 100px)", color: "var(--white)" }}>Aniket <span style={{ color: "var(--amber)" }}>Bansal</span></h1>
+              <p style={{ maxWidth: 600, fontSize: 18, color: "var(--slate)", marginTop: 24 }}>MSc Data Analytics graduate (University of Strathclyde). Transforming claims data into automated commercial strategy.</p>
+              <div style={{ marginTop: 48, display: "flex", gap: 20 }}>
+                <a href="mailto:ianiketbansalx@gmail.com" className="btn-outline">Email Me</a>
+                <a href="http://www.linkedin.com/in/ianiketx" target="_blank" className="btn-outline">LinkedIn</a>
+              </div>
+            </section>
+
+            <DataTicker />
+
+            <section id="work" style={{ padding: "120px 80px", maxWidth: 1200, margin: "0 auto" }}>
+              <span className="section-label">01 — Experience</span>
+              {experience.map(job => (
+                <FadeSection key={job.role}>
+                  <div className="card-premium" style={{ padding: 48, marginTop: 40 }}>
+                    <h3 style={{ color: "var(--white)", fontSize: 24, marginBottom: 8 }}>{job.role}</h3>
+                    <div style={{ fontFamily: "var(--mono)", color: "var(--amber)", fontSize: 12, marginBottom: 24 }}>{job.company} · {job.location}</div>
+                    <ul style={{ color: "var(--slate)", fontSize: 14, display: "flex", flexDirection: "column", gap: 12 }}>
+                      {job.points.map((p, i) => <li key={i}>{p}</li>)}
+                    </ul>
+                  </div>
+                </FadeSection>
+              ))}
+            </section>
+
+            <section id="projects" style={{ padding: "120px 80px", maxWidth: 1200, margin: "0 auto" }}>
+              <span className="section-label">02 — Projects</span>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: 24, marginTop: 40 }}>
+                {projects.map(p => (
+                  <div key={p.id} className="card-premium" style={{ padding: 32, cursor: "pointer" }} onClick={() => setActiveProject(p)}>
+                    <h4 style={{ color: "var(--white)", fontSize: 20, marginBottom: 12 }}>{p.title}</h4>
+                    <p style={{ color: "var(--slate)", fontSize: 14, marginBottom: 24 }}>{p.summary}</p>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                        {p.stack?.map(s => <span key={s} className="tag">{s}</span>)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <footer style={{ padding: "100px 80px", borderTop: "1px solid var(--line2)", textAlign: "center" }}>
+              <ul className="social-container" style={{ justifyContent: "center", marginBottom: 40 }}>
+                <li className="icon-content">
+                  <div className="tooltip">LinkedIn</div>
+                  <a href="http://www.linkedin.com/in/ianiketx" target="_blank" className="link" data-social="linkedin">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  </a>
+                </li>
+                <li className="icon-content">
+                  <div className="tooltip">GitHub</div>
+                  <a href="https://github.com/ianiketx" target="_blank" className="link" data-social="github">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  </a>
+                </li>
+              </ul>
+              <div style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--slate2)" }}>
+                ANIKET BANSAL · {new Date().getFullYear()} · GLASGOW, UK
+              </div>
+            </footer>
+          </main>
+        </motion.div>
+      )}
+
+      <AnimatePresence>
+        {activeProject && (
+          <div style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActiveProject(null)} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.9)", backdropFilter: "blur(12px)" }} />
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} style={{ position: "relative", width: "100%", maxWidth: 600, background: "var(--ink2)", border: "1px solid var(--line2)", padding: 40, maxHeight: "80vh", overflowY: "auto" }}>
+              <h2 style={{ fontFamily: "var(--serif)", fontSize: 24, marginBottom: 20 }}>{activeProject.title}</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {activeProject.bullets.map((b: any, i: any) => (
+                  <div key={i} style={{ padding: 12, background: "rgba(240,165,0,0.03)", borderLeft: "2px solid var(--amber)", fontSize: 14 }}>{b}</div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
