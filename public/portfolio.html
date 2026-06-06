@@ -707,42 +707,85 @@ footer{padding:56px 64px;display:flex;align-items:center;justify-content:space-b
 
 <script>
 const projects=[
-  {org:"Databricks · MLflow · PySpark",title:"Indian Roads ML Pipeline",
-   summary:"An end-to-end machine learning pipeline built on the Databricks Lakehouse platform to analyse and predict accident severity across 20,000+ Indian road incident records.",
-   challenge:"Road incident data arrived in raw, unstructured CSV form with significant missing values, inconsistent column naming, and no standardised severity labelling — making direct modelling impossible.",
-   solution:"Designed a 3-layer medallion architecture using Unity Catalog (Bronze/Silver/Gold), engineering composite danger scores via PySpark transformations. Trained XGBoost and Random Forest classifiers with full hyperparameter tuning tracked via MLflow experiments.",
-   result:"Achieved 87% classification accuracy. MLflow tracking cut model iteration cycles by ~40%.",
-   pts:["Designed Bronze/Silver/Gold 3-layer schema in Unity Catalog for governed data flow.","Engineered composite road danger scores combining speed, road type, and weather conditions via PySpark.","Trained and compared XGBoost vs Random Forest classifiers with cross-validation.","Logged all runs, metrics, and model artifacts in MLflow for full reproducibility.","Deployed best-performing model to MLflow Model Registry for production use."]},
-  {org:"NHS · SQL · Power BI",title:"NHS Logistics Strategic Insight",
-   summary:"Rigorous data analysis project supporting a major NHS logistics operations review, directly informing a £3.2 million strategic investment decision through statistical root-cause analysis.",
-   challenge:"Operational logistics data existed across multiple disconnected systems with inconsistent date formats, duplicate records, and no unified view of the end-to-end supply chain — making bottleneck identification extremely difficult.",
-   solution:"Built a unified SQL schema by cleansing and joining data from disparate NHS source systems. Applied statistical analysis to identify delay distribution patterns, isolating a single stage responsible for 72% of all delays.",
-   result:"Analysis directly cited in the £3.2m investment sign-off. 72% bottleneck identified and documented.",
-   pts:["Designed and implemented a cleansed unified SQL schema from 4 source systems.","Conducted statistical root-cause analysis to isolate the primary 72% delay bottleneck.","Built executive-ready Power BI dashboards with drill-through capability by region and supply category.","Presented findings in a structured briefing document adopted by the investment review committee."]},
-  {org:"Ernst & Young · Finance",title:"EY Market Trend Modeling",
-   summary:"Designed and implemented volatility and trend models for financial market analysis as part of an EY simulation, producing boardroom-grade dashboards and quantitative sector risk assessments.",
-   challenge:"Financial market data for multiple sectors contained high volatility with overlapping signals, making it difficult to distinguish genuine trend shifts from noise without a robust statistical framework.",
-   solution:"Applied GARCH-based volatility modelling and rolling-window regression in Python to isolate genuine trend signals. Built sector comparison dashboards in Power BI enabling side-by-side risk profiling.",
-   result:"Identified 3 high-risk sectors with quantitative evidence; delivered a board-ready strategic deck.",
-   pts:["Built Python volatility models using GARCH and rolling regression on multi-sector time series data.","Identified and quantified exposure risk across 8 market sectors.","Produced a 12-slide executive strategic deck with supporting quantitative evidence for each recommendation.","Built Power BI dashboards with dynamic sector filtering for ongoing monitoring."]},
-  {org:"Experian · SQL · Python",title:"Experian Data QA Automation",
-   summary:"Built a fully automated data extraction and quality assurance system for a regulated financial data environment, replacing manual checking processes with an auditable, error-proof pipeline.",
-   challenge:"Manual data QA processes were taking analysts hours per day, were inconsistently applied, and produced no audit trail — creating compliance risk in a heavily regulated financial data context.",
-   solution:"Designed a Python-orchestrated pipeline that automatically extracted, validated, and flagged anomalies against a predefined ruleset. Every check was logged to an audit table in SQL with timestamps and resolution status.",
-   result:"Manual QA effort reduced ~70%. 100% data accuracy achieved. Full audit trail for compliance.",
-   pts:["Automated extraction from 3 source databases using Python and parameterised SQL queries.","Implemented 14 distinct validation rules covering nulls, range checks, referential integrity, and format compliance.","Built a SQL-based audit log capturing every check result with timestamp and analyst resolution notes.","Achieved 100% data accuracy across all downstream reports following pipeline deployment."]},
-  {org:"JPMorgan Chase & Co. · Forage",title:"JPMorgan Quantitative Research Simulation",
-   summary:"Completed JPMorgan Chase's official Quantitative Research Job Simulation via Forage, working through a series of real-world finance tasks spanning commodity pricing, credit risk, and score analysis.",
-   challenge:"Each task required applying quantitative finance methods — pricing derivatives, modelling credit risk distributions, and segmenting FICO scores — with no provided templates or guided frameworks.",
-   solution:"Independently researched and applied Black-Scholes-adjacent pricing logic for the commodity storage contract, implemented logistic regression for credit default probability, and used dynamic programming to optimise FICO bucket boundaries.",
-   result:"All tasks completed and certified by JPMorgan Chase & Co. via Forage — February 2026.",
-   pts:["Investigated and analysed price data to identify patterns in commodity market movements.","Built a pricing model for a commodity storage contract using discounted cash flow logic.","Conducted credit risk analysis using probability of default modelling.","Applied dynamic programming to optimise FICO score bucketing for maximum predictive power."]},
-  {org:"Emerge Lab · Data Visualisation",title:"Workforce Insights Research",
-   summary:"Produced board-level data visualisations and a comprehensive data dictionary for a multi-workstream workforce diversity study at Emerge Lab, with outputs adopted directly by senior leadership.",
-   challenge:"The study spanned multiple workstreams with differing data collection methods, variable definitions, and reporting timelines — making consistent, comparable visualisation extremely difficult.",
-   solution:"Developed a unified data dictionary as the first deliverable, standardising variable definitions across all workstreams. Used this as the foundation for a consistent visual language across all dashboards and board report extracts.",
-   result:"All deliverables completed on time. Visualisations adopted at board level with zero revision requests.",
-   pts:["Authored a comprehensive data dictionary covering all variables across 4 research workstreams.","Designed a consistent visual language for cross-workstream comparability in dashboards and reports.","Produced strategic visual extracts formatted specifically for board-level review.","Managed competing deadlines across workstreams, delivering all outputs within the project timeline."]}
+  {
+    org: "Databricks · MLflow · PySpark",
+    title: "Scalable Systems Architecture & Pipeline Design - Indian Roads ML",
+    summary: "An end-to-end machine learning pipeline built on the Databricks Lakehouse platform featuring a scalable backend design to process and analyse 20,000+ Indian road incident records.",
+    challenge: "Road incident data arrived in raw, unstructured CSV form with significant missing values, inconsistent column naming, and no standardised severity labelling — requiring robust system architecture to make modelling possible.",
+    solution: "Designed a 3-layer medallion architecture using Unity Catalog (Bronze/Silver/Gold). Built a PySpark-based data processing pipeline with systematic transformation stages and deployed models to MLflow Model Registry.",
+    result: "Demonstrated scalable backend design patterns and production deployment practices. Handled 20,000+ records with full versioning and system reliability.",
+    pts: [
+      "Designed 3-layer medallion architecture (Bronze/Silver/Gold using Unity Catalog) demonstrating proven scalable backend design patterns.",
+      "Built PySpark-based data processing pipeline handling 20,000+ records with systematic transformation stages and error handling.",
+      "Deployed trained models to MLflow Model Registry with full versioning understanding of production deployment practices and system reliability."
+    ]
+  },
+  {
+    org: "NHS · SQL · Power BI",
+    title: "Database Design & Multi-System Integration - NHS Logistics",
+    summary: "Rigorous system analysis and database design project supporting a major NHS logistics operations review, directly informing a £3.2 million strategic investment decision.",
+    challenge: "Operational logistics data existed across multiple disconnected systems with inconsistent data formats, making system integration and bottleneck identification extremely difficult.",
+    solution: "Designed a unified SQL schema integrating multiple disparate source systems. Applied statistical analysis to identify system performance bottlenecks.",
+    result: "Delivered analysis directly supporting a £3.2 million investment decision, demonstrating the business impact of backend system optimisation.",
+    pts: [
+      "Designed unified SQL schema integrating 4 disparate source systems with inconsistent data formats, demonstrating real-world system integration.",
+      "Applied statistical analysis to identify system performance bottleneck (72% of delays concentrated at a single operational stage).",
+      "Delivered analysis directly supporting £3.2 million investment decision, demonstrating business impact of backend system optimisation."
+    ]
+  },
+  {
+    org: "Ernst & Young · Finance",
+    title: "EY Market Trend Modeling",
+    summary: "Designed and implemented volatility and trend models for financial market analysis as part of an EY simulation, producing boardroom-grade dashboards and quantitative sector risk assessments.",
+    challenge: "Financial market data for multiple sectors contained high volatility with overlapping signals, making it difficult to distinguish genuine trend shifts from noise without a robust statistical framework.",
+    solution: "Applied GARCH-based volatility modelling and rolling-window regression in Python to isolate genuine trend signals. Built sector comparison dashboards in Power BI enabling side-by-side risk profiling.",
+    result: "Identified 3 high-risk sectors with quantitative evidence; delivered a board-ready strategic deck.",
+    pts: [
+      "Built Python volatility models using GARCH and rolling regression on multi-sector time series data.",
+      "Identified and quantified exposure risk across 8 market sectors.",
+      "Produced a 12-slide executive strategic deck with supporting quantitative evidence for each recommendation.",
+      "Built Power BI dashboards with dynamic sector filtering for ongoing monitoring."
+    ]
+  },
+  {
+    org: "Experian · SQL · Python",
+    title: "Production Backend Automation System - Experian",
+    summary: "Designed and implemented a fully automated Python backend system for a regulated financial data environment, replacing manual daily work to achieve 100% data accuracy.",
+    challenge: "Manual data QA processes were inconsistently applied and produced no audit trail — creating compliance risk in a heavily regulated financial data context requiring an error-proof pipeline.",
+    solution: "Architected a multi-database integration system pulling from 3 separate sources with parameterised SQL queries and a comprehensive validation framework.",
+    result: "Achieved 100% data accuracy and full reliability, replacing manual QA with production-grade automated error handling and logging.",
+    pts: [
+      "Designed and implemented fully automated Python backend system replacing manual daily work, achieving 100% data accuracy and full reliability.",
+      "Architected multi-database integration from 3 separate sources with parameterised SQL queries, demonstrating core backend system integration skill.",
+      "Implemented comprehensive validation framework (14 distinct validation rules) with SQL-based audit logging and error handling for production-grade quality."
+    ]
+  },
+  {
+    org: "JPMorgan Chase & Co. · Forage",
+    title: "Independent Problem-Solving & Algorithmic Implementation - JPMorgan",
+    summary: "Completed JPMorgan Chase's official Quantitative Research Job Simulation, independently researching and implementing complex financial algorithms.",
+    challenge: "Tasks required applying advanced mathematical modelling and quantitative finance methods to complex datasets with no provided templates or guided frameworks.",
+    solution: "Applied advanced problem-solving techniques, including dynamic programming, logistic regression, and discounted cash flow logic, to build robust financial models.",
+    result: "Demonstrated advanced systems thinking and algorithmic implementation capabilities, certified by JPMorgan Chase & Co.",
+    pts: [
+      "Completed JPMorgan Chase Quantitative Research certification, independently researching and implementing complex financial algorithms without provided templates.",
+      "Applied advanced problem-solving (dynamic programming, logistic regression, discounted cash flow logic), demonstrating systems thinking and mathematical capability."
+    ]
+  },
+  {
+    org: "Emerge Lab · Data Visualisation",
+    title: "Workforce Insights Research",
+    summary: "Produced board-level data visualisations and a comprehensive data dictionary for a multi-workstream workforce diversity study at Emerge Lab, with outputs adopted directly by senior leadership.",
+    challenge: "The study spanned multiple workstreams with differing data collection methods, variable definitions, and reporting timelines — making consistent, comparable visualisation extremely difficult.",
+    solution: "Developed a unified data dictionary as the first deliverable, standardising variable definitions across all workstreams. Used this as the foundation for a consistent visual language across all dashboards and board report extracts.",
+    result: "All deliverables completed on time. Visualisations adopted at board level with zero revision requests.",
+    pts: [
+      "Authored a comprehensive data dictionary covering all variables across 4 research workstreams.",
+      "Designed a consistent visual language for cross-workstream comparability in dashboards and reports.",
+      "Produced strategic visual extracts formatted specifically for board-level review.",
+      "Managed competing deadlines across workstreams, delivering all outputs within the project timeline."
+    ]
+  }
 ];
 
 function enter(){
